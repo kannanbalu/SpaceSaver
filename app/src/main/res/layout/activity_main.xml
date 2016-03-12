@@ -1,0 +1,52 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:minHeight="30dp" />
+
+    <TextView android:id="@+id/qualityText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Image Quality" />
+
+    <SeekBar android:id="@+id/imgBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100" />
+
+    <TextView android:id="@+id/spaceThreshold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select capacity threshold"
+        android:focusable="true" />
+
+    <SeekBar android:id="@+id/thresholdBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100" />
+
+
+    <Button android:id="@+id/compressButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Compress Images" />
+
+    <GridView android:id="@+id/imageGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:numColumns="2"
+        android:visibility="visible"
+        android:clickable="true"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"></GridView>
+
+    </LinearLayout>
