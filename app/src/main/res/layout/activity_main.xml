@@ -33,11 +33,18 @@
         android:layout_height="wrap_content"
         android:max="100" />
 
+    <TextView android:id="@+id/storageCapacity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Storage capacity:"
+        android:focusable="true" />
 
     <Button android:id="@+id/compressButton"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:text="Compress Images" />
+        android:text="Compress Images"
+        android:maxWidth="10dp"
+        android:minHeight="10dp" />
 
     <GridView android:id="@+id/imageGrid"
         android:layout_width="wrap_content"

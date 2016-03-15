@@ -21,6 +21,8 @@ import java.util.List;
 public class Utility {
 
     public static final String LOG_TAG_NAME = "SpaceSaver.Utility";
+    public static final long KILOBYTE = 1024;
+    public static final int MAX_IMAGES_TO_COMPRESS = 15;
 
     public static String getBucketId(String path) {
         return String.valueOf(path.toLowerCase().hashCode());
@@ -42,19 +44,52 @@ public class Utility {
                 selection,
                 selectionArgs,
                 null);
-        ArrayList<String> result = new ArrayList<String>(cursor.getCount());
+        int maxCount = MAX_IMAGES_TO_COMPRESS;  //compress only MAX_IMAGES_TO_COMPRESS images at a time lest we run out of memory.
+        int count = 0;
+        int size = cursor.getCount() < maxCount ? cursor.getCount() : maxCount;
+        //ArrayList<String> result = new ArrayList<String>(cursor.getCount());
+        ArrayList<String> result = new ArrayList<String>(size);
         if (cursor.moveToFirst()) {
             final int dataColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             do {
                 final String data = cursor.getString(dataColumn);
                 Log.i(LOG_TAG_NAME, data + " " + " size = " + (new File(data).length()));
                 result.add(data);
-            } while (cursor.moveToNext());
+                count++;
+            } while (count < maxCount && cursor.moveToNext());
         }
         cursor.close();
         return result;
     }
 
+    public static void deleteImages(List<String> imgList, int maxCount) {
+        int count = 0;
+        for (String image : imgList) {
+            File imageFile = new File(image);
+            if (imageFile.exists()) {
+                imageFile.delete();
+            }
+            count++;
+            if (count > maxCount) break;
+        }
+    }
+
+    public static String calculateSpaceSaved(List<Pair> pairs) {
+        int totalSourceFilesLength = 0;
+        int totalCompressedFilesLength = 0;
+        for (Pair pair : pairs) {
+            File srcFile = new File(pair.srcImageFile);
+            File compressedFile = new File(pair.compressedImageFile);
+            totalSourceFilesLength += srcFile.length();
+            totalCompressedFilesLength += compressedFile.length();
+        }
+        int totalSaved = totalSourceFilesLength - totalCompressedFilesLength;
+        int percentSaved = (totalSaved * 100)/ totalSourceFilesLength;
+        String savedString = " Original files capacity : " + getSizeInString(totalSourceFilesLength) +
+                            " Compressed files capacity : " + getSizeInString(totalCompressedFilesLength) +
+                            " Total Savings : [ " + percentSaved + " %]";
+        return savedString;
+    }
 
     public static ArrayList<Pair> compressImages(List<String> imgList, int imageQuality) {
         ArrayList<Pair> list = new ArrayList<Pair>();
@@ -66,6 +101,7 @@ public class Utility {
         } else {
             Log.i(LOG_TAG_NAME, "Folder: " + folder + " already exists ");
         }
+        Log.i(LOG_TAG_NAME, "compressImages, compressing images with image Quality value := " + imageQuality);
         for (String image : imgList) {
             String compressedImage = compressImage(image, imageQuality, imgFolder);
             list.add(new Pair(image, compressedImage));
@@ -101,7 +137,7 @@ public class Utility {
         return null;
     }
 
-    public static void getStorageCapacity() {
+    public static String getStorageCapacity() {
         Log.i(LOG_TAG_NAME, Environment.getExternalStorageDirectory().toString());
         Log.i(LOG_TAG_NAME, Environment.getDataDirectory().toString());
         Log.i(LOG_TAG_NAME, Environment.getDownloadCacheDirectory().toString());
@@ -110,7 +146,6 @@ public class Utility {
 
         StatFs sfs = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
         try {
-            final long KILOBYTE = 1024;
             StatFs internalStatFs = new StatFs( Environment.getRootDirectory().getAbsolutePath() );
             long internalTotal;
             long internalFree;
@@ -138,13 +173,34 @@ public class Utility {
             Log.i(LOG_TAG_NAME, "Total bytes = " + total);
             Log.i(LOG_TAG_NAME, "Available bytes = " + free);
             Log.i(LOG_TAG_NAME, "Used bytes = " + used);
-            Log.i(LOG_TAG_NAME, " % capacity used " + (used * 100/ total) );
-            Log.i(LOG_TAG_NAME, " % capacity unused " + (free * 100/ total)) ;
+            Log.i(LOG_TAG_NAME, " % capacity used " + (used * 100 / total));
+            Log.i(LOG_TAG_NAME, " % capacity unused " + (free * 100 / total)) ;
 
+            String capacityStr = "Total : " + getSizeInString(total * KILOBYTE * KILOBYTE) + " Available : " + getSizeInString(free * KILOBYTE * KILOBYTE)
+                                        + " Used : " + getSizeInString(used * KILOBYTE * KILOBYTE) + "  [ " + (used * 100 / total) + "%used ]";
+            return capacityStr;
         } catch (Throwable t) {
             t.printStackTrace();
             Log.i(LOG_TAG_NAME, t.toString());
-            return;
+            return "";
         }
+    }
+
+    public static String getSizeInString(long filesize) {
+        double size = filesize;
+        String sizeStr = String.valueOf(filesize) + " bytes";
+        if (size >= KILOBYTE) {
+            size = size / KILOBYTE;
+            sizeStr = String.format("%.2f", size) + "K bytes";
+        }
+        if (size >= KILOBYTE) {
+            size = size / KILOBYTE;
+            sizeStr = String.format("%.2f", size) + "M bytes";
+        }
+        if (size >= KILOBYTE) {
+            size = size / KILOBYTE;
+            sizeStr = String.format("%.2f", size) + "G bytes";
+        }
+        return sizeStr;
     }
 }

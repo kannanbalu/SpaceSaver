@@ -1,8 +1,10 @@
 package course.examples.spacesaver;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,10 @@ public class MainActivity extends Activity {
     public static final String SPACE_THRESHOLD = "SpaceThreshold";
     private int imgQuality = 80;
     private GridView gridView = null;
+    private TextView storageTextView = null;
+    private ImageAdapter imageAdapter = null;
+
+    public static final String LOG_TAG_NAME = "SpaceSaver.MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,9 @@ public class MainActivity extends Activity {
         final TextView tView = (TextView)findViewById(R.id.qualityText);
         tView.setText("Image Quality: " + imgQuality + " / 100");
 
+        storageTextView = (TextView)findViewById(R.id.storageCapacity);
+        storageTextView.setText(Utility.getStorageCapacity());
+
         final SeekBar imgBar = (SeekBar)findViewById(R.id.imgBar);
         imgBar.setProgress(imgQuality);
         imgBar.setEnabled(true);
@@ -49,6 +58,7 @@ public class MainActivity extends Activity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
                 tView.setText("Image Quality: " + progressValue + " / " + imgBar.getMax());
+                MainActivity.this.imgQuality = progressValue;
                 SharedPreferences.Editor edit = prefs.edit();
                 edit.putInt(IMAGE_QUALITY, progressValue);
                 edit.commit();
@@ -100,14 +110,28 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Image compression started...", Toast.LENGTH_LONG ).show();
+                Log.i(LOG_TAG_NAME, "Fetching images on the device taken by camera");
                 List<String> imageFiles = Utility.getCameraImages(MainActivity.this);
+                Log.i(LOG_TAG_NAME, "Begin compressing images - # of images found := " + imageFiles.size() + " with imageQuality := " + imgQuality);
                 List<Pair> imageList = Utility.compressImages(imageFiles, imgQuality);
-                gridView.setAdapter(new ImageAdapter(MainActivity.this, imageList));
-                Toast.makeText(MainActivity.this, "Image compression completed...", Toast.LENGTH_LONG ).show();
+                Log.i(LOG_TAG_NAME, "set the compressed image list to the grid view: # of images := " + imageList.size());
+                setGridViewAdapter(imageList);
+                //Utility.deleteImages(imageFiles, Utility.MAX_IMAGES_TO_COMPRESS);
+                String msg = Utility.calculateSpaceSaved(imageList);
+                Toast.makeText(MainActivity.this, imageList.size() + " images compressed successfully...\n " + msg, Toast.LENGTH_LONG ).show();
             }
         });
 
         gridView = (GridView)findViewById(R.id.imageGrid);
+    }
+
+    public void setGridViewAdapter(List<Pair> list) {
+            if (imageAdapter == null) {
+                imageAdapter = new ImageAdapter(this, list);
+            } else {
+                imageAdapter.reInitialize(this, list);
+            }
+            gridView.setAdapter(imageAdapter);
     }
 
     @Override
