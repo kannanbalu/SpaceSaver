@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['setimages',['setImages',['../classcourse_1_1examples_1_1spacesaver_1_1_image_adapter.html#a1bc7a805204d8065aaddc2ad1b0c4a1e',1,'course::examples::spacesaver::ImageAdapter']]],
-  ['space_5fthreshold',['SPACE_THRESHOLD',['../classcourse_1_1examples_1_1spacesaver_1_1_main_activity.html#a73bec883ca93d8c9c0691b1233f08f38',1,'course::examples::spacesaver::MainActivity']]]
+  ['mainactivity',['MainActivity',['../classcourse_1_1examples_1_1spacesaver_1_1_main_activity.html',1,'course::examples::spacesaver']]],
+  ['mainactivity_2ejava',['MainActivity.java',['../_main_activity_8java.html',1,'']]],
+  ['max_5fimages_5fto_5fcompress',['MAX_IMAGES_TO_COMPRESS',['../classcourse_1_1examples_1_1spacesaver_1_1_utility.html#a8953f2c1e57838e6e76c22071b4e5a02',1,'course::examples::spacesaver::Utility']]]
 ];

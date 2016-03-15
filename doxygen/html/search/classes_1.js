@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['mainactivity',['MainActivity',['../classcourse_1_1examples_1_1spacesaver_1_1_main_activity.html',1,'course::examples::spacesaver']]]
+  ['imageadapter',['ImageAdapter',['../classcourse_1_1examples_1_1spacesaver_1_1_image_adapter.html',1,'course::examples::spacesaver']]],
+  ['imageviewer',['ImageViewer',['../classcourse_1_1examples_1_1spacesaver_1_1_image_viewer.html',1,'course::examples::spacesaver']]]
 ];

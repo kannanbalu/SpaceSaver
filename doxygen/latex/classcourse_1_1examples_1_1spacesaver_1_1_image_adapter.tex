@@ -25,15 +25,24 @@ Collaboration diagram for course.\+examples.\+spacesaver.\+Image\+Adapter\+:
 \item 
 \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a4a64ff6f4afb032a7b909d452da4d0f7}{Image\+Adapter} (Context c, List$<$ \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_pair}{Pair} $>$ list)
 \item 
+void \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a8b457cf9300ede478217eb387fe5e757}{re\+Initialize} (Context c, List$<$ \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_pair}{Pair} $>$ list)
+\item 
 void \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a1bc7a805204d8065aaddc2ad1b0c4a1e}{set\+Images} (List$<$ \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_pair}{Pair} $>$ list)
 \item 
 int \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a7446ece5dd5f5c4f4afeb7a19cdb8728}{get\+Count} ()
 \item 
-Object \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a2011762c7b8bd44e291c1d75ca223581}{get\+Item} (int position)
+\hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_bmp_data}{Bmp\+Data} \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a28aa9706d5497b18f2ac7c57d8212391}{get\+Item} (int position)
 \item 
 long \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a54e7407f7a3d8e2e18513e8826ee861e}{get\+Item\+Id} (int position)
 \item 
+Bitmap \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a1cede336baa9c4e6fc4f77c7b92f8537}{decode\+Sampled\+Bitmap\+From\+Resource} (File img\+File, int req\+Width, int req\+Height)  throws Exception 
+\item 
 View \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a4072f1ec52b57c428c4c85261be15986}{get\+View} (int position, View convert\+View, View\+Group parent)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a76420c1f261150aa098281e6621bd6cf}{calculate\+In\+Sample\+Size} (Bitmap\+Factory.\+Options options, int req\+Width, int req\+Height)
 \end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
@@ -57,6 +66,24 @@ Created by kannanb on 3/8/2016.
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a76420c1f261150aa098281e6621bd6cf}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!calculate\+In\+Sample\+Size@{calculate\+In\+Sample\+Size}}
+\index{calculate\+In\+Sample\+Size@{calculate\+In\+Sample\+Size}!course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}}
+\subsubsection[{calculate\+In\+Sample\+Size(\+Bitmap\+Factory.\+Options options, int req\+Width, int req\+Height)}]{\setlength{\rightskip}{0pt plus 5cm}static int course.\+examples.\+spacesaver.\+Image\+Adapter.\+calculate\+In\+Sample\+Size (
+\begin{DoxyParamCaption}
+\item[{Bitmap\+Factory.\+Options}]{options, }
+\item[{int}]{req\+Width, }
+\item[{int}]{req\+Height}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a76420c1f261150aa098281e6621bd6cf}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a1cede336baa9c4e6fc4f77c7b92f8537}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!decode\+Sampled\+Bitmap\+From\+Resource@{decode\+Sampled\+Bitmap\+From\+Resource}}
+\index{decode\+Sampled\+Bitmap\+From\+Resource@{decode\+Sampled\+Bitmap\+From\+Resource}!course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}}
+\subsubsection[{decode\+Sampled\+Bitmap\+From\+Resource(\+File img\+File, int req\+Width, int req\+Height)}]{\setlength{\rightskip}{0pt plus 5cm}Bitmap course.\+examples.\+spacesaver.\+Image\+Adapter.\+decode\+Sampled\+Bitmap\+From\+Resource (
+\begin{DoxyParamCaption}
+\item[{File}]{img\+File, }
+\item[{int}]{req\+Width, }
+\item[{int}]{req\+Height}
+\end{DoxyParamCaption}
+) throws Exception}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a1cede336baa9c4e6fc4f77c7b92f8537}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a7446ece5dd5f5c4f4afeb7a19cdb8728}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!get\+Count@{get\+Count}}
 \index{get\+Count@{get\+Count}!course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}}
 \subsubsection[{get\+Count()}]{\setlength{\rightskip}{0pt plus 5cm}int course.\+examples.\+spacesaver.\+Image\+Adapter.\+get\+Count (
@@ -64,13 +91,13 @@ Created by kannanb on 3/8/2016.
 {}
 \end{DoxyParamCaption}
 )}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a7446ece5dd5f5c4f4afeb7a19cdb8728}
-\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a2011762c7b8bd44e291c1d75ca223581}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!get\+Item@{get\+Item}}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a28aa9706d5497b18f2ac7c57d8212391}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!get\+Item@{get\+Item}}
 \index{get\+Item@{get\+Item}!course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}}
-\subsubsection[{get\+Item(int position)}]{\setlength{\rightskip}{0pt plus 5cm}Object course.\+examples.\+spacesaver.\+Image\+Adapter.\+get\+Item (
+\subsubsection[{get\+Item(int position)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bmp\+Data} course.\+examples.\+spacesaver.\+Image\+Adapter.\+get\+Item (
 \begin{DoxyParamCaption}
 \item[{int}]{position}
 \end{DoxyParamCaption}
-)}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a2011762c7b8bd44e291c1d75ca223581}
+)}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a28aa9706d5497b18f2ac7c57d8212391}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a54e7407f7a3d8e2e18513e8826ee861e}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!get\+Item\+Id@{get\+Item\+Id}}
 \index{get\+Item\+Id@{get\+Item\+Id}!course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}}
 \subsubsection[{get\+Item\+Id(int position)}]{\setlength{\rightskip}{0pt plus 5cm}long course.\+examples.\+spacesaver.\+Image\+Adapter.\+get\+Item\+Id (
@@ -87,6 +114,14 @@ Created by kannanb on 3/8/2016.
 \item[{View\+Group}]{parent}
 \end{DoxyParamCaption}
 )}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a4072f1ec52b57c428c4c85261be15986}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a8b457cf9300ede478217eb387fe5e757}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!re\+Initialize@{re\+Initialize}}
+\index{re\+Initialize@{re\+Initialize}!course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}}
+\subsubsection[{re\+Initialize(\+Context c, List$<$ Pair $>$ list)}]{\setlength{\rightskip}{0pt plus 5cm}void course.\+examples.\+spacesaver.\+Image\+Adapter.\+re\+Initialize (
+\begin{DoxyParamCaption}
+\item[{Context}]{c, }
+\item[{List$<$ {\bf Pair} $>$}]{list}
+\end{DoxyParamCaption}
+)}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a8b457cf9300ede478217eb387fe5e757}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a1bc7a805204d8065aaddc2ad1b0c4a1e}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!set\+Images@{set\+Images}}
 \index{set\+Images@{set\+Images}!course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}}
 \subsubsection[{set\+Images(\+List$<$ Pair $>$ list)}]{\setlength{\rightskip}{0pt plus 5cm}void course.\+examples.\+spacesaver.\+Image\+Adapter.\+set\+Images (

@@ -7,16 +7,26 @@ static String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_afb38
 \item 
 static List$<$ String $>$ \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a7d516823eb324565737ea69a39e604f9}{get\+Camera\+Images} (Context context)
 \item 
+static void \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a534b914baf6a7ef4d7f681a7d56e4da6}{delete\+Images} (List$<$ String $>$ img\+List, int max\+Count)
+\item 
+static String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a6e99256bde02985ef71df62265c56217}{calculate\+Space\+Saved} (List$<$ \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_pair}{Pair} $>$ pairs)
+\item 
 static Array\+List$<$ \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_pair}{Pair} $>$ \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a5029adf50e50346e2bb08bb1557ed064}{compress\+Images} (List$<$ String $>$ img\+List, int image\+Quality)
 \item 
 static String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a8f1697a3c166596b60f83c21d23162fb}{compress\+Image} (String img\+File, int image\+Quality, String img\+Folder)
 \item 
-static void \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a6884eae5b4f555bb793d5411f94d72f8}{get\+Storage\+Capacity} ()
+static String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a52b2d0846affd9ee60328055d871f4df}{get\+Storage\+Capacity} ()
+\item 
+static String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_aba39539a00ba3e4d7c74198092926dee}{get\+Size\+In\+String} (long filesize)
 \end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 static final String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a306cf6f2267973d242405123fc51c775}{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E} = \char`\"{}Space\+Saver.\+Utility\char`\"{}
+\item 
+static final long \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a291dacb443d1ba16e25c95b0b436b6ec}{K\+I\+L\+O\+B\+Y\+T\+E} = 1024
+\item 
+static final int \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a8953f2c1e57838e6e76c22071b4e5a02}{M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S} = 15
 \end{DoxyCompactItemize}
 
 
@@ -24,6 +34,13 @@ static final String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility
 Created by kannanb on 3/7/2016. 
 
 \subsection{Member Function Documentation}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a6e99256bde02985ef71df62265c56217}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!calculate\+Space\+Saved@{calculate\+Space\+Saved}}
+\index{calculate\+Space\+Saved@{calculate\+Space\+Saved}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
+\subsubsection[{calculate\+Space\+Saved(\+List$<$ Pair $>$ pairs)}]{\setlength{\rightskip}{0pt plus 5cm}static String course.\+examples.\+spacesaver.\+Utility.\+calculate\+Space\+Saved (
+\begin{DoxyParamCaption}
+\item[{List$<$ {\bf Pair} $>$}]{pairs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a6e99256bde02985ef71df62265c56217}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a8f1697a3c166596b60f83c21d23162fb}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!compress\+Image@{compress\+Image}}
 \index{compress\+Image@{compress\+Image}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
 \subsubsection[{compress\+Image(\+String img\+File, int image\+Quality, String img\+Folder)}]{\setlength{\rightskip}{0pt plus 5cm}static String course.\+examples.\+spacesaver.\+Utility.\+compress\+Image (
@@ -41,6 +58,14 @@ Created by kannanb on 3/7/2016.
 \item[{int}]{image\+Quality}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a5029adf50e50346e2bb08bb1557ed064}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a534b914baf6a7ef4d7f681a7d56e4da6}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!delete\+Images@{delete\+Images}}
+\index{delete\+Images@{delete\+Images}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
+\subsubsection[{delete\+Images(\+List$<$ String $>$ img\+List, int max\+Count)}]{\setlength{\rightskip}{0pt plus 5cm}static void course.\+examples.\+spacesaver.\+Utility.\+delete\+Images (
+\begin{DoxyParamCaption}
+\item[{List$<$ String $>$}]{img\+List, }
+\item[{int}]{max\+Count}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a534b914baf6a7ef4d7f681a7d56e4da6}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_afb38a3ff9ea902240c74adad9d975b80}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!get\+Bucket\+Id@{get\+Bucket\+Id}}
 \index{get\+Bucket\+Id@{get\+Bucket\+Id}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
 \subsubsection[{get\+Bucket\+Id(\+String path)}]{\setlength{\rightskip}{0pt plus 5cm}static String course.\+examples.\+spacesaver.\+Utility.\+get\+Bucket\+Id (
@@ -55,19 +80,32 @@ Created by kannanb on 3/7/2016.
 \item[{Context}]{context}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a7d516823eb324565737ea69a39e604f9}
-\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a6884eae5b4f555bb793d5411f94d72f8}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!get\+Storage\+Capacity@{get\+Storage\+Capacity}}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_aba39539a00ba3e4d7c74198092926dee}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!get\+Size\+In\+String@{get\+Size\+In\+String}}
+\index{get\+Size\+In\+String@{get\+Size\+In\+String}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
+\subsubsection[{get\+Size\+In\+String(long filesize)}]{\setlength{\rightskip}{0pt plus 5cm}static String course.\+examples.\+spacesaver.\+Utility.\+get\+Size\+In\+String (
+\begin{DoxyParamCaption}
+\item[{long}]{filesize}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_aba39539a00ba3e4d7c74198092926dee}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a52b2d0846affd9ee60328055d871f4df}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!get\+Storage\+Capacity@{get\+Storage\+Capacity}}
 \index{get\+Storage\+Capacity@{get\+Storage\+Capacity}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
-\subsubsection[{get\+Storage\+Capacity()}]{\setlength{\rightskip}{0pt plus 5cm}static void course.\+examples.\+spacesaver.\+Utility.\+get\+Storage\+Capacity (
+\subsubsection[{get\+Storage\+Capacity()}]{\setlength{\rightskip}{0pt plus 5cm}static String course.\+examples.\+spacesaver.\+Utility.\+get\+Storage\+Capacity (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a6884eae5b4f555bb793d5411f94d72f8}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a52b2d0846affd9ee60328055d871f4df}
 
 
 \subsection{Member Data Documentation}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a291dacb443d1ba16e25c95b0b436b6ec}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!K\+I\+L\+O\+B\+Y\+T\+E@{K\+I\+L\+O\+B\+Y\+T\+E}}
+\index{K\+I\+L\+O\+B\+Y\+T\+E@{K\+I\+L\+O\+B\+Y\+T\+E}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
+\subsubsection[{K\+I\+L\+O\+B\+Y\+T\+E}]{\setlength{\rightskip}{0pt plus 5cm}final long course.\+examples.\+spacesaver.\+Utility.\+K\+I\+L\+O\+B\+Y\+T\+E = 1024\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a291dacb443d1ba16e25c95b0b436b6ec}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a306cf6f2267973d242405123fc51c775}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E@{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E}}
 \index{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E@{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
 \subsubsection[{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E}]{\setlength{\rightskip}{0pt plus 5cm}final String course.\+examples.\+spacesaver.\+Utility.\+L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E = \char`\"{}Space\+Saver.\+Utility\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a306cf6f2267973d242405123fc51c775}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a8953f2c1e57838e6e76c22071b4e5a02}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S@{M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S}}
+\index{M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S@{M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
+\subsubsection[{M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S}]{\setlength{\rightskip}{0pt plus 5cm}final int course.\+examples.\+spacesaver.\+Utility.\+M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S = 15\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a8953f2c1e57838e6e76c22071b4e5a02}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
