@@ -135,11 +135,10 @@ public class MainActivity extends Activity {
                 if (imageList != null) {
                     imageList.clear();
                 }
-                Toast.makeText(MainActivity.this, "Image compression started...", Toast.LENGTH_LONG ).show();
+                Toast.makeText(MainActivity.this, "Image compression started... Please wait...", Toast.LENGTH_LONG ).show();
                 imageList = Utility.compressImages(imageFiles, imgQuality);
                 Log.i(LOG_TAG_NAME, "set the compressed image list to the grid view: # of images := " + imageList.size());
                 setGridViewAdapter(imageList);
-                //Utility.deleteImages(imageFiles, Utility.MAX_IMAGES_TO_COMPRESS);
                 String msg = Utility.calculateSpaceSaved(imageList);
                 Toast.makeText(MainActivity.this, imageList.size() + " images compressed successfully...\n " + msg, Toast.LENGTH_LONG ).show();
                 if (false && bDeleteImages) { //remove false later

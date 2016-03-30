@@ -52,7 +52,6 @@ public class Utility {
         int count = 0;
         int size = cursor.getCount() < maxCount ? cursor.getCount() : maxCount;
         Log.i(LOG_TAG_NAME, "Total # of images fetched from the device : " + cursor.getCount());
-        //ArrayList<String> result = new ArrayList<String>(cursor.getCount());
         ArrayList<String> result = new ArrayList<String>(size);
         if (cursor.moveToFirst()) {
             final int dataColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -60,7 +59,7 @@ public class Utility {
                 final String data = cursor.getString(dataColumn);
                 long filesize = new File(data).length();
                 Log.i(LOG_TAG_NAME, data + " " + " size = " + filesize);
-                if (Utility.getSizeInMbytes(filesize) > MAX_FILE_SIZE ) {
+                if (filesize == 0 || Utility.getSizeInMbytes(filesize) > MAX_FILE_SIZE ) {
                     continue;   //It's too memory and compute intensive to compress and load images with higher size on smaller devices. Just skip them.
                 }
                 result.add(data);
