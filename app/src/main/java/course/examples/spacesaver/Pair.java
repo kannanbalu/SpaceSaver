@@ -1,6 +1,7 @@
 package course.examples.spacesaver;
 
 /**
+ * Wrapper class containing absolute path to source image and the compressed image
  * Created by kannanb on 3/8/2016.
  */
 public class Pair {

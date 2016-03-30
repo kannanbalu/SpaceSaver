@@ -39,12 +39,31 @@
         android:text="Storage capacity:"
         android:focusable="true" />
 
-    <Button android:id="@+id/compressButton"
-        android:layout_width="170dp"
+    <CheckBox
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Compress Images"
-        android:maxWidth="10dp"
-        android:minHeight="10dp" />
+        android:text="Delete original images after compression"
+        android:id="@+id/DeleteImages" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Compress Images"
+            android:id="@+id/compressButton" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Statistics"
+            android:id="@+id/statsBtn" />
+    </LinearLayout>
 
     <GridView android:id="@+id/imageGrid"
         android:layout_width="wrap_content"

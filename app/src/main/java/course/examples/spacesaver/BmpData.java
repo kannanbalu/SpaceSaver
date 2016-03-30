@@ -7,6 +7,10 @@ import java.io.File;
 /**
  * Created by kannanb on 3/14/2016.
  */
+
+/**
+ * Wrapper class to hold the path to an image file and its bitmap
+ */
 public class BmpData {
     Bitmap bmap;
     File srcFile;

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Utility class containing reusable and independent methods
  * Created by kannanb on 3/7/2016.
  */
 public class Utility {
@@ -23,37 +24,45 @@ public class Utility {
     public static final String LOG_TAG_NAME = "SpaceSaver.Utility";
     public static final long KILOBYTE = 1024;
     public static final int MAX_IMAGES_TO_COMPRESS = 15;
+    public static final int MAX_FILE_SIZE = 8; //8 MB file size
 
     public static String getBucketId(String path) {
         return String.valueOf(path.toLowerCase().hashCode());
     }
 
+    /*
+     * Retrieves list of images on the device from the location /DCIM/Camera
+     * @param context Context used for querying content provider in retrieving images
+     * @return returns a list containing absolute path to images on the device
+     */
     public static List<String> getCameraImages(Context context) {
 
         final String CAMERA_IMAGE_BUCKET_NAME = Environment.getExternalStorageDirectory().toString() + "/DCIM/Camera";
         final String CAMERA_IMAGE_BUCKET_ID = getBucketId(CAMERA_IMAGE_BUCKET_NAME);
 
-        final String CAMERA_THUMBNAIL_BUCKET_NAME = Environment.getExternalStorageDirectory().toString() + "/DCIM/.thumbnails";
-        final String CAMERA_THUMBNAIL_BUCKET_ID = getBucketId(CAMERA_THUMBNAIL_BUCKET_NAME);
-
-        final String[] projection = { MediaStore.Images.Media.DATA };
+        final String[] projection = { MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID };
         final String selection = MediaStore.Images.Media.BUCKET_ID + " = ?";
         final String[] selectionArgs = { CAMERA_IMAGE_BUCKET_ID };
         final Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 projection,
-                selection,
-                selectionArgs,
-                null);
+                null, //selection,
+                null, //selectionArgs,
+                MediaStore.MediaColumns.SIZE + " DESC");
         int maxCount = MAX_IMAGES_TO_COMPRESS;  //compress only MAX_IMAGES_TO_COMPRESS images at a time lest we run out of memory.
         int count = 0;
         int size = cursor.getCount() < maxCount ? cursor.getCount() : maxCount;
+        Log.i(LOG_TAG_NAME, "Total # of images fetched from the device : " + cursor.getCount());
         //ArrayList<String> result = new ArrayList<String>(cursor.getCount());
         ArrayList<String> result = new ArrayList<String>(size);
         if (cursor.moveToFirst()) {
             final int dataColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             do {
                 final String data = cursor.getString(dataColumn);
-                Log.i(LOG_TAG_NAME, data + " " + " size = " + (new File(data).length()));
+                long filesize = new File(data).length();
+                Log.i(LOG_TAG_NAME, data + " " + " size = " + filesize);
+                if (Utility.getSizeInMbytes(filesize) > MAX_FILE_SIZE ) {
+                    continue;   //It's too memory and compute intensive to compress and load images with higher size on smaller devices. Just skip them.
+                }
                 result.add(data);
                 count++;
             } while (count < maxCount && cursor.moveToNext());
@@ -62,6 +71,11 @@ public class Utility {
         return result;
     }
 
+    /*
+     * Deletes the first maxCount images from the provided list. The images are deleted from the physical device
+     * @param imgList  list containing path to images that needs to be deleted
+     * @param maxCount delete maxCount images from the imgList
+     */
     public static void deleteImages(List<String> imgList, int maxCount) {
         int count = 0;
         for (String image : imgList) {
@@ -70,10 +84,33 @@ public class Utility {
                 imageFile.delete();
             }
             count++;
-            if (count > maxCount) break;
+            if (count >= maxCount) break;
         }
     }
 
+    /*
+     * Deletes all the images from the provided list. The images are deleted from the physical device
+     * @param imgList  list containing path to images that needs to be deleted
+     */
+    public static void deleteImages(List<String> imgList) {
+        deleteImages(imgList, imgList.size());
+    }
+
+    /*
+     * Deletes imageFile from the physical device
+     * @param imgFile file to be deleted
+     */
+    public static void deleteImage(File imgFile) {
+        if (imgFile.exists()) {
+            imgFile.delete();
+        }
+    }
+
+    /*
+     * Method to evaluate the space saved as a result of compressed images
+     * @param pairs A list of Pair objects (containing source file and compressed image)
+     * @return A string containing information on space occupied by original images, compressed images and total savings
+     */
     public static String calculateSpaceSaved(List<Pair> pairs) {
         int totalSourceFilesLength = 0;
         int totalCompressedFilesLength = 0;
@@ -91,6 +128,12 @@ public class Utility {
         return savedString;
     }
 
+    /*
+     * Method to compress all the images in a given list of images of desired image quality
+     * @param imgList  A list of images that needs to be compressed
+     * @param imageQuality Images to be compressed of the desired quality
+     * @return Returns a list of Pair objects containing path to source and compressed image
+     */
     public static ArrayList<Pair> compressImages(List<String> imgList, int imageQuality) {
         ArrayList<Pair> list = new ArrayList<Pair>();
         String imgFolder = Environment.getExternalStorageDirectory().toString() + "/CompressedImages/";
@@ -109,6 +152,13 @@ public class Utility {
         return list;
     }
 
+    /*
+     * Method to compress an image of the desired image quality and place the generated compressed image in the imgFolder
+     * @param imgFile Absolute path to image file that needs to be compressed
+     * @param imageQuality The quality level of the compressed image
+     * @param imgFolder  Path to the location where the generated compressed image needs to be placed
+     * @return Absolute path to the newly generated image
+     */
     public static String compressImage(String imgFile, int imageQuality, String imgFolder) {
         try {
             final String PREFIX_COMPRESSED = "compressed_";
@@ -137,6 +187,10 @@ public class Utility {
         return null;
     }
 
+    /*
+     * Method to print the storage capacity details (total, used, free)
+     * @return String containing details on the capacity details
+     */
     public static String getStorageCapacity() {
         Log.i(LOG_TAG_NAME, Environment.getExternalStorageDirectory().toString());
         Log.i(LOG_TAG_NAME, Environment.getDataDirectory().toString());
@@ -186,6 +240,49 @@ public class Utility {
         }
     }
 
+    /*
+     * Method to retrieve the percentage of space used on the device
+     * @return percentage of space used on the device
+     */
+    public long getUsedSpacePercentage() {
+        StatFs sfs = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
+        long usedPercentage = 0;
+        try {
+            StatFs internalStatFs = new StatFs(Environment.getRootDirectory().getAbsolutePath());
+            long internalTotal;
+            long internalFree;
+
+            StatFs externalStatFs = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
+            long externalTotal;
+            long externalFree;
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                internalTotal = (internalStatFs.getBlockCountLong() * internalStatFs.getBlockSizeLong()) / (KILOBYTE * KILOBYTE);
+                internalFree = (internalStatFs.getAvailableBlocksLong() * internalStatFs.getBlockSizeLong()) / (KILOBYTE * KILOBYTE);
+                externalTotal = (externalStatFs.getBlockCountLong() * externalStatFs.getBlockSizeLong()) / (KILOBYTE * KILOBYTE);
+                externalFree = (externalStatFs.getAvailableBlocksLong() * externalStatFs.getBlockSizeLong()) / (KILOBYTE * KILOBYTE);
+            } else {
+                internalTotal = ((long) internalStatFs.getBlockCount() * (long) internalStatFs.getBlockSize()) / (KILOBYTE * KILOBYTE);
+                internalFree = ((long) internalStatFs.getAvailableBlocks() * (long) internalStatFs.getBlockSize()) / (KILOBYTE * KILOBYTE);
+                externalTotal = ((long) externalStatFs.getBlockCount() * (long) externalStatFs.getBlockSize()) / (KILOBYTE * KILOBYTE);
+                externalFree = ((long) externalStatFs.getAvailableBlocks() * (long) externalStatFs.getBlockSize()) / (KILOBYTE * KILOBYTE);
+            }
+
+            long total = internalTotal + externalTotal;
+            long free = internalFree + externalFree;
+            long used = total - free;
+            usedPercentage = used * 100 / total;
+        } catch (Exception e) {
+
+        }
+        return usedPercentage;
+    }
+
+    /*
+     * Method to retrieve a string containing size of a file in bytes, Kbytes, Mbytes, Gbytes based on the size provided in bytes
+     * @param filsize  Size of a file in bytes
+     * @return Return a string containing the size converted to K, M, G bytes
+     */
     public static String getSizeInString(long filesize) {
         double size = filesize;
         String sizeStr = String.valueOf(filesize) + " bytes";
@@ -202,5 +299,11 @@ public class Utility {
             sizeStr = String.format("%.2f", size) + "G bytes";
         }
         return sizeStr;
+    }
+
+    public static double getSizeInMbytes(long filesize) {
+        double size = filesize;
+        size = size / (KILOBYTE * KILOBYTE);
+        return size;
     }
 }

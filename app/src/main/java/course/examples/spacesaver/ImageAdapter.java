@@ -18,7 +18,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -178,11 +177,11 @@ public class ImageAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setClass(context, course.examples.spacesaver.ImageViewer.class);
-                intent.putExtra("ImageFileName", data.srcFile.getAbsolutePath());
+                intent.putExtra(Constants.IMAGE_FILENAME, data.srcFile.getAbsolutePath());
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 data.bmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
-                intent.putExtra("ImageView", byteArray);
+                intent.putExtra(Constants.IMAGE_VIEW, byteArray);
                 context.startActivity(intent);
             }
         });

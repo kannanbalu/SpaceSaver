@@ -4,23 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.FloatMath;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.List;
 
 /**
  * Created by kannanb on 3/14/2016.
@@ -28,7 +20,7 @@ import java.util.List;
 public class ImageViewer extends Activity {
 
     public static final String LOG_TAG_NAME = "SpaceSaver.ImageViewer";
-    private static final String TAG = "Touch";
+    private static final String LOG_TAG_TOUCH = "SpaceSaver.ImageViewer.Touch";
 
     // These matrices will be used to scale points of the image
     Matrix matrix = new Matrix();
@@ -54,21 +46,22 @@ public class ImageViewer extends Activity {
         TextView textView = (TextView) findViewById(R.id.fileTextView);
 
         Intent intent = getIntent();
-        byte [] imageBytes = intent.getByteArrayExtra("ImageView");
+        byte [] imageBytes = intent.getByteArrayExtra(Constants.IMAGE_VIEW);
         Log.i(LOG_TAG_NAME, " image bytes is := " + imageBytes);
         Log.i(LOG_TAG_NAME, " image bytes length is := " + imageBytes.length);
-        String imageFile = intent.getStringExtra("ImageFileName");
+        String imageFile = intent.getStringExtra(Constants.IMAGE_FILENAME);
         Log.i(LOG_TAG_NAME, " image file is := " + imageFile);
         textView.setText(imageFile);
         Bitmap bmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length).copy(Bitmap.Config.ARGB_8888, true);
-        Canvas c = new Canvas(bmap);
-        Log.i(LOG_TAG_NAME, "canvas created..." + bmap);
+        imageView.setScaleType(ImageView.ScaleType.MATRIX); //This is a must or else imageview draws image in center by default.
         imageView.setImageBitmap(bmap);
 
         Drawable d = imageView.getDrawable();
         Rect bounds = d.getBounds();
         int top = (int)imageView.getY() + bounds.top;
         int left = (int)imageView.getX() + bounds.left;
+        Log.i(LOG_TAG_NAME, "x: " + imageView.getX() + "y: " + imageView.getY() + " bounds-top: " + bounds.top + " bounds-left: " + bounds.left);
+
         matrix.setTranslate(top, left);
     }
 
@@ -79,15 +72,12 @@ public class ImageViewer extends Activity {
         view.setScaleType(ImageView.ScaleType.MATRIX);
         float scale;
 
-        dumpEvent(event);
-        // Handle touch events here...
-
         switch (event.getAction() & MotionEvent.ACTION_MASK)
         {
-            case MotionEvent.ACTION_DOWN:   // first finger down only
+            case MotionEvent.ACTION_DOWN:   // first finger down
                 savedMatrix.set(matrix);
                 start.set(event.getX(), event.getY());
-                Log.d(TAG, "mode=DRAG"); // write to LogCat
+                Log.i(LOG_TAG_TOUCH, "e.getX: " + event.getX() + " e.getY: " + event.getY());
                 mode = DRAG;
                 break;
 
@@ -96,18 +86,18 @@ public class ImageViewer extends Activity {
             case MotionEvent.ACTION_POINTER_UP: // second finger lifted
 
                 mode = NONE;
-                Log.d(TAG, "mode=NONE");
+                Log.d(LOG_TAG_TOUCH, "pointer up");
                 break;
 
             case MotionEvent.ACTION_POINTER_DOWN: // first and second finger down
 
                 oldDist = spacing(event);
-                Log.d(TAG, "oldDist=" + oldDist);
+                Log.d(LOG_TAG_TOUCH, "oldDist=" + oldDist);
                 if (oldDist > 5f) {
                     savedMatrix.set(matrix);
                     midPoint(mid, event);
                     mode = ZOOM;
-                    Log.d(TAG, "mode=ZOOM");
+                    Log.d(LOG_TAG_TOUCH, "mode=ZOOM");
                 }
                 break;
 
@@ -116,29 +106,23 @@ public class ImageViewer extends Activity {
                 if (mode == DRAG)
                 {
                     matrix.set(savedMatrix);
-                    matrix.postTranslate(event.getX() - start.x, event.getY() - start.y); // create the transformation in the matrix  of points
+                    matrix.postTranslate(event.getX() - start.x, event.getY() - start.y);
                 }
                 else if (mode == ZOOM)
                 {
-                    // pinch zooming
                     float newDist = spacing(event);
-                    Log.d(TAG, "newDist=" + newDist);
+                    Log.d(LOG_TAG_TOUCH, "newDist=" + newDist);
                     if (newDist > 5f)
                     {
                         matrix.set(savedMatrix);
-                        scale = newDist / oldDist; // setting the scaling of the
-                        // matrix...if scale > 1 means
-                        // zoom in...if scale < 1 means
-                        // zoom out
+                        scale = newDist / oldDist; // setting the scaling up or down depending on 2-finger distance expanding or shrinking
                         matrix.postScale(scale, scale, mid.x, mid.y);
                     }
                 }
                 break;
         }
-
-        view.setImageMatrix(matrix); // display the transformation on screen
-
-        return true; // indicate event was handled
+        view.setImageMatrix(matrix); // refresh imageview with the transformed matrix .
+        return true; // event is consumed
     }
 
     /*
@@ -167,35 +151,5 @@ public class ImageViewer extends Activity {
         float x = event.getX(0) + event.getX(1);
         float y = event.getY(0) + event.getY(1);
         point.set(x / 2, y / 2);
-    }
-
-    /** Show an event in the LogCat view, for debugging */
-    private void dumpEvent(MotionEvent event)
-    {
-        String names[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE","POINTER_DOWN", "POINTER_UP", "7?", "8?", "9?" };
-        StringBuilder sb = new StringBuilder();
-        int action = event.getAction();
-        int actionCode = action & MotionEvent.ACTION_MASK;
-        sb.append("event ACTION_").append(names[actionCode]);
-
-        if (actionCode == MotionEvent.ACTION_POINTER_DOWN || actionCode == MotionEvent.ACTION_POINTER_UP)
-        {
-            sb.append("(pid ").append(action >> MotionEvent.ACTION_POINTER_ID_SHIFT);
-            sb.append(")");
-        }
-
-        sb.append("[");
-        for (int i = 0; i < event.getPointerCount(); i++)
-        {
-            sb.append("#").append(i);
-            sb.append("(pid ").append(event.getPointerId(i));
-            sb.append(")=").append((int) event.getX(i));
-            sb.append(",").append((int) event.getY(i));
-            if (i + 1 < event.getPointerCount())
-                sb.append(";");
-        }
-
-        sb.append("]");
-        Log.d("Touch Events ---------", sb.toString());
     }
 }
