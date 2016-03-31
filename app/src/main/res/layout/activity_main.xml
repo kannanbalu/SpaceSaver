@@ -7,6 +7,14 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SpaceSaver App"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#244cc3" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
@@ -20,7 +28,7 @@
     <SeekBar android:id="@+id/imgBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="100" />
+        android:max="90" />
 
     <TextView android:id="@+id/spaceThreshold"
         android:layout_width="match_parent"

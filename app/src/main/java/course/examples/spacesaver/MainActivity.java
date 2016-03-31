@@ -16,6 +16,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,10 @@ public class MainActivity extends Activity {
     private ImageAdapter imageAdapter = null;
     private List<Pair> imageList = null;
     private boolean bDeleteImages = false;
+    private Button statsBtn = null;
+    private String spaceSavingMessage = "";
+    private long [] srcFileSizes = null;
+    private long [] compressedFileSizes = null;
 
     public static final String LOG_TAG_NAME = "SpaceSaver.MainActivity";
 
@@ -45,7 +50,7 @@ public class MainActivity extends Activity {
         bDeleteImages = prefs.getBoolean(Constants.DELETE_IMAGES, false);
 
         final TextView tView = (TextView)findViewById(R.id.qualityText);
-        tView.setText("Image Quality: " + imgQuality + " / 100");
+        tView.setText("Image Quality: " + imgQuality + " / 90");
 
         storageTextView = (TextView)findViewById(R.id.storageCapacity);
         storageTextView.setText(Utility.getStorageCapacity());
@@ -126,8 +131,12 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Log.i(LOG_TAG_NAME, "Fetching images on the device taken by camera");
+                statsBtn.setEnabled(false);
+                srcFileSizes = null;
+                compressedFileSizes = null;
                 List<String> imageFiles = Utility.getCameraImages(MainActivity.this);
                 if (imageFiles == null || imageFiles.size() == 0) {
+                    setGridViewAdapter(null);
                     Toast.makeText(MainActivity.this, "No images present for compression...", Toast.LENGTH_LONG ).show();
                     return;
                 }
@@ -139,9 +148,11 @@ public class MainActivity extends Activity {
                 imageList = Utility.compressImages(imageFiles, imgQuality);
                 Log.i(LOG_TAG_NAME, "set the compressed image list to the grid view: # of images := " + imageList.size());
                 setGridViewAdapter(imageList);
-                String msg = Utility.calculateSpaceSaved(imageList);
-                Toast.makeText(MainActivity.this, imageList.size() + " images compressed successfully...\n " + msg, Toast.LENGTH_LONG ).show();
-                if (false && bDeleteImages) { //remove false later
+                spaceSavingMessage = Utility.calculateSpaceSaved(imageList);
+                Toast.makeText(MainActivity.this, imageList.size() + " images compressed successfully...\n " + spaceSavingMessage, Toast.LENGTH_LONG ).show();
+                statsBtn.setEnabled(true);
+                populateImageSizes(); //must call this before deleting original images...
+                if ( bDeleteImages) {
                     Utility.deleteImages(imageFiles); //Delete all original (uncompressed) images
                 }
             }
@@ -149,18 +160,40 @@ public class MainActivity extends Activity {
 
         gridView = (GridView)findViewById(R.id.imageGrid);
 
-        Button statsBtn = (Button)findViewById(R.id.statsBtn);
+        statsBtn = (Button)findViewById(R.id.statsBtn);
         statsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (srcFileSizes == null || compressedFileSizes == null || srcFileSizes.length != compressedFileSizes.length) {
+                    return;
+                }
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setClass(MainActivity.this, course.examples.spacesaver.StatsActivity.class);
-                ArrayList<String> list = getImagesList();
-                intent.putExtra(Constants.IMAGE_LIST, list);
+                //intent.putExtra(Constants.IMAGE_LIST, list);
+
+                intent.putExtra(Constants.SRC_FILE_SIZES, srcFileSizes);
+                intent.putExtra(Constants.COMPRESSED_FILE_SIZES, compressedFileSizes);
+                intent.putExtra(Constants.SPACE_SAVED_INFO, spaceSavingMessage);
+
                 MainActivity.this.startActivity(intent);
             }
         });
+        statsBtn.setEnabled(false);
+    }
 
+    public void populateImageSizes() {
+        ArrayList<String> list = getImagesList();
+        //intent.putExtra(Constants.IMAGE_LIST, list);
+        srcFileSizes = new long[imageList.size()];
+        compressedFileSizes = new long[srcFileSizes.length];
+        int count = 0;
+        for (Pair p : imageList) {
+            srcFileSizes[count] = new File(p.srcImageFile).length();
+            compressedFileSizes[count] = new File(p.compressedImageFile).length();
+            count++;
+        }
+        Log.i(LOG_TAG_NAME, "# of source files length: " + srcFileSizes.length);
     }
 
     public ArrayList<String> getImagesList() {
@@ -174,6 +207,10 @@ public class MainActivity extends Activity {
     }
 
     public void setGridViewAdapter(List<Pair> list) {
+            if (list == null || list.size() == 0) {
+                gridView.setAdapter(null);
+                return;
+            }
             if (imageAdapter == null) {
                 imageAdapter = new ImageAdapter(this, list);
             } else {

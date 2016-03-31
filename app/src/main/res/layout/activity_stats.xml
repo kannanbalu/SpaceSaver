@@ -13,7 +13,6 @@
     android:fitsSystemWindows="true"
     tools:context="course.examples.spacesaver.StatsActivity">
 
-
 </LinearLayout>
 
 </ScrollView>

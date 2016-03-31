@@ -13,4 +13,8 @@ public interface Constants {
     public static final String IMAGE_LIST = "ImageList";
     public static final String IMAGE_FILENAME = "ImageFileName";
     public static final String IMAGE_VIEW = "ImageView";
+
+    public static final String SRC_FILE_SIZES = "SrcFileSizes";
+    public static final String COMPRESSED_FILE_SIZES = "CompressedFileSizes";
+    public static final String SPACE_SAVED_INFO = "SpaceSavedInfo";
 }

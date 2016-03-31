@@ -75,6 +75,10 @@ public class ImageAdapter extends BaseAdapter {
         Log.i(LOG_TAG_NAME, "position: " + position + " - " + imgFile);
         try {
             File origFile = new File(imgFile);
+            if (!origFile.exists()) {
+                bmpList.add((BmpData)null);
+                return null; //If it reaches here, that is because the image has been deleted already
+            }
             Log.i(LOG_TAG_NAME, "File: " + origFile + " exists " + origFile.exists());
             Bitmap bmap = decodeSampledBitmapFromResource(origFile, IMAGE_WIDTH, IMAGE_HEIGHT).copy(Bitmap.Config.ARGB_8888, true);
             Log.i(LOG_TAG_NAME, imgFile + " decoded successfully!");
@@ -154,6 +158,12 @@ public class ImageAdapter extends BaseAdapter {
         Log.i(LOG_TAG_NAME, "getView: position: " + position + " - imageView: " + imageView.toString());
 
         final BmpData data = getItem(position);
+
+        if (data == null || data.bmap == null) {
+            //If the original image file is already deleted, there is nothing to be drawn and so no need to create an Intent for this view on user's click/touch event
+            return imageView;
+        }
+
         Log.i(LOG_TAG_NAME, " bmpdata srcfile := " + data.srcFile);
         long filesize = data.srcFile.length();
 
@@ -162,13 +172,10 @@ public class ImageAdapter extends BaseAdapter {
         Canvas c = new Canvas(data.bmap);
         Log.i(LOG_TAG_NAME, "canvas created..." + data.bmap);
         Log.i(LOG_TAG_NAME, "About to draw text");
-        c.drawText(Utility.getSizeInString(filesize), 20, 50, paint);
+        c.drawText(Utility.getSizeInString(filesize), 50, 50, paint);
         Log.i(LOG_TAG_NAME, "Text drawn");
 
-        if (data.bmap == null) {
-            //If the original image file is already deleted, there is nothing to be drawn.
-            return imageView;
-        }
+
 
         imageView.setImageBitmap((Bitmap) data.bmap);
 

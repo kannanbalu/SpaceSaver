@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.chart.PointStyle;
@@ -16,9 +17,14 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.GraphicalView;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Class for displaying Line Chart representing statistical comparisions between original and the respective compressed images
+ */
 public class StatsActivity extends Activity {
 
     public static final String LOG_TAG_NAME = "SpaceSaver.StatsActivity";
@@ -27,6 +33,7 @@ public class StatsActivity extends Activity {
     private List<Double> compressedFileList = new ArrayList<Double>();
     private double maxsize = 0;
     private String sizestr = "Mbytes";
+    private String spaceSavedMessage = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +43,17 @@ public class StatsActivity extends Activity {
         LinearLayout linearLayout =  (LinearLayout)findViewById(R.id.layoutinfo);
 
         Intent intent = getIntent();
-        ArrayList<String> imageFiles = (ArrayList<String>)intent.getStringArrayListExtra(Constants.IMAGE_LIST);
+        spaceSavedMessage = intent.getStringExtra(Constants.SPACE_SAVED_INFO);
+
+        //TextView textView = (TextView)findViewById(R.id.spaceSavedText);
+        //textView.setText(spaceSavedMessage);
+
+        long [] srcFileSizes = intent.getLongArrayExtra(Constants.SRC_FILE_SIZES);
+        long [] compressedFileSizes = intent.getLongArrayExtra(Constants.COMPRESSED_FILE_SIZES);
+
+        Log.i(LOG_TAG_NAME, "# of source files length: " + srcFileSizes.length + " compressed files length: " + compressedFileSizes.length);
+
+      /*  ArrayList<String> imageFiles = (ArrayList<String>)intent.getStringArrayListExtra(Constants.IMAGE_LIST);
         maxsize = 0;
         for (int i=0; i<imageFiles.size(); i += 2) {
             double srcsize = Utility.getSizeInMbytes(new File(imageFiles.get(i)).length());
@@ -46,6 +63,23 @@ public class StatsActivity extends Activity {
             srcFileList.add(srcsize);
             compressedFileList.add(Utility.getSizeInMbytes((new File(imageFiles.get(i + 1)).length())));
         }
+      */
+        maxsize = 0;
+        for (int i=0; i<srcFileSizes.length; i++) {
+            double srcsize = Utility.getSizeInMbytes(srcFileSizes[i]);
+            if (srcsize > maxsize) {
+                maxsize = srcsize;
+            }
+            BigDecimal bd = new BigDecimal(srcsize).setScale(1, RoundingMode.HALF_EVEN);
+            srcsize = bd.doubleValue();
+            srcFileList.add(srcsize);
+
+            double compressedsize = Utility.getSizeInMbytes(compressedFileSizes[i]);
+            bd = new BigDecimal(compressedsize).setScale(1, RoundingMode.HALF_EVEN);
+            compressedsize = bd.doubleValue();
+            compressedFileList.add(compressedsize);
+        }
+
         if (maxsize < 1) {  //Less than 1MB image
             maxsize = maxsize * Utility.KILOBYTE;  //kilobytes
             sizestr = "Kbytes";
@@ -115,7 +149,7 @@ public class StatsActivity extends Activity {
         mRenderer.setShowGrid(true);
 
         mRenderer.setLabelsColor(Color.GREEN);
-        mRenderer.setChartTitle("Original image vs Compressed image comparison");
+        mRenderer.setChartTitle("Original image vs Compressed image comparison \n\n" + spaceSavedMessage);
         mRenderer.setChartTitleTextSize(15);
 
         mRenderer.setInScroll(true);
