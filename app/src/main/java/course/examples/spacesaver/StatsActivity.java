@@ -53,17 +53,6 @@ public class StatsActivity extends Activity {
 
         Log.i(LOG_TAG_NAME, "# of source files length: " + srcFileSizes.length + " compressed files length: " + compressedFileSizes.length);
 
-      /*  ArrayList<String> imageFiles = (ArrayList<String>)intent.getStringArrayListExtra(Constants.IMAGE_LIST);
-        maxsize = 0;
-        for (int i=0; i<imageFiles.size(); i += 2) {
-            double srcsize = Utility.getSizeInMbytes(new File(imageFiles.get(i)).length());
-            if (srcsize > maxsize) {
-                maxsize = srcsize;
-            }
-            srcFileList.add(srcsize);
-            compressedFileList.add(Utility.getSizeInMbytes((new File(imageFiles.get(i + 1)).length())));
-        }
-      */
         maxsize = 0;
         for (int i=0; i<srcFileSizes.length; i++) {
             double srcsize = Utility.getSizeInMbytes(srcFileSizes[i]);

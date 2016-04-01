@@ -1,9 +1,11 @@
 package course.examples.spacesaver;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
@@ -304,5 +306,87 @@ public class Utility {
         double size = filesize;
         size = size / (KILOBYTE * KILOBYTE);
         return size;
+    }
+
+    public static class ImageCompressTask extends AsyncTask<Object, Integer, List<Pair>> {
+
+        private ProgressDialog dialog = null;
+        private MainActivity activity = null;
+        private boolean bDeleteImages = false;
+        private List<String> imageFiles = null;
+        private String dialogMessage = "";
+
+        public ImageCompressTask(MainActivity context) {
+            activity = context;
+            dialog = new ProgressDialog(context);
+            dialogMessage = "Fetching images from the device...";
+            dialog.setMessage(dialogMessage);
+            dialog.setTitle("Please Wait");
+            dialog.setMax(100);
+            dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i(LOG_TAG_NAME, "progress dialog visible...");
+            dialog.show();
+        }
+
+        @Override
+        protected List<Pair> doInBackground(Object... params) {
+            int imgQuality = (int)params[0];
+            List<Pair> imageList = (List<Pair>)params[1];
+            bDeleteImages = (boolean)params[2];
+            Log.i(LOG_TAG_NAME, "Fetching images on the device");
+            publishProgress(10);
+            imageFiles = Utility.getCameraImages(activity);
+            Log.i(LOG_TAG_NAME, "Fetched " + imageFiles.size() + " images");
+            if (imageFiles == null || imageFiles.size() == 0) {
+                return imageList;
+            }
+            Log.i(LOG_TAG_NAME, "Begin compressing images - # of images found := " + imageFiles.size() + " with imageQuality := " + imgQuality);
+
+            String imgFolder = Environment.getExternalStorageDirectory().toString() + "/CompressedImages/";
+            File folder = new File(imgFolder);
+            if (! folder.exists()) {
+                folder.mkdir();
+                Log.i(LOG_TAG_NAME, "Folder: " + folder + " created ");
+            } else {
+                Log.i(LOG_TAG_NAME, "Folder: " + folder + " already exists ");
+            }
+            Log.i(LOG_TAG_NAME, "compressImages, compressing images with image Quality value := " + imgQuality);
+            int progressvalue = (int)Math.round((double)(90 / imageFiles.size()));
+            int currentprogress = 10;
+            dialogMessage = "Compressing images ...";
+            for (String image : imageFiles) {
+                String compressedImage = compressImage(image, imgQuality, imgFolder);
+                imageList.add(new Pair(image, compressedImage));
+                currentprogress += progressvalue;
+                publishProgress(currentprogress);
+            }
+
+            Log.i(LOG_TAG_NAME, "image compression done");
+            return imageList;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... value) {
+            super.onProgressUpdate(value);
+            dialog.setMessage(dialogMessage);
+            Log.i(LOG_TAG_NAME, "progess update: " + value[0]);
+            dialog.setProgress(value[0]);
+        }
+
+        @Override
+        protected void onPostExecute(List<Pair> result) {
+            super.onPostExecute(result);
+            Log.i(LOG_TAG_NAME, "progress dialog dismissed!");
+            activity.updateGridView();
+            if ( bDeleteImages && imageFiles != null) {
+                deleteImages(imageFiles); //Delete all original (uncompressed) images
+            }
+            dialog.dismiss();
+        }
     }
 }

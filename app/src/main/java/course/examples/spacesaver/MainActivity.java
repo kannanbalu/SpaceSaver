@@ -126,8 +126,31 @@ public class MainActivity extends Activity {
             }
         });
 
-        Button btn = (Button)findViewById(R.id.compressButton);
+        final Button btn = (Button)findViewById(R.id.compressButton);
         btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                btn.setEnabled(false);
+                statsBtn.setEnabled(false);
+
+                srcFileSizes = null;
+                compressedFileSizes = null;
+
+                imageList = new ArrayList<Pair>();
+                Utility.ImageCompressTask task = new Utility.ImageCompressTask(MainActivity.this);
+                task.execute(imgQuality, imageList, bDeleteImages);
+                try {
+                    //imageList = task.get();
+                } catch (Exception e) {
+                    Toast.makeText(MainActivity.this, "Image compression failed...", Toast.LENGTH_LONG ).show();
+                    btn.setEnabled(true);
+                    return;
+                }
+                statsBtn.setEnabled(true);
+                btn.setEnabled(true);
+            }
+            /*
             @Override
             public void onClick(View v) {
                 Log.i(LOG_TAG_NAME, "Fetching images on the device taken by camera");
@@ -155,7 +178,7 @@ public class MainActivity extends Activity {
                 if ( bDeleteImages) {
                     Utility.deleteImages(imageFiles); //Delete all original (uncompressed) images
                 }
-            }
+            } */
         });
 
         gridView = (GridView)findViewById(R.id.imageGrid);
@@ -182,9 +205,15 @@ public class MainActivity extends Activity {
         statsBtn.setEnabled(false);
     }
 
+    public void updateGridView() {
+        setGridViewAdapter(imageList);
+        spaceSavingMessage = Utility.calculateSpaceSaved(imageList);
+        Toast.makeText(MainActivity.this, imageList.size() + " images compressed successfully...\n " + spaceSavingMessage, Toast.LENGTH_LONG ).show();
+        populateImageSizes(); //must call this before deleting original images...
+     }
+
     public void populateImageSizes() {
         ArrayList<String> list = getImagesList();
-        //intent.putExtra(Constants.IMAGE_LIST, list);
         srcFileSizes = new long[imageList.size()];
         compressedFileSizes = new long[srcFileSizes.length];
         int count = 0;
