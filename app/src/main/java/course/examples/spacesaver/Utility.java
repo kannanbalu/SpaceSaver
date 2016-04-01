@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -63,6 +64,9 @@ public class Utility {
                 Log.i(LOG_TAG_NAME, data + " " + " size = " + filesize);
                 if (filesize == 0 || Utility.getSizeInMbytes(filesize) > MAX_FILE_SIZE ) {
                     continue;   //It's too memory and compute intensive to compress and load images with higher size on smaller devices. Just skip them.
+                }
+                if (data.indexOf(Constants.COMPRESSED_IMAGE_FOLDER) != -1) {  //skip our own folder to prevent recompressing and deleting the already compressed images
+                    continue;
                 }
                 result.add(data);
                 count++;
@@ -137,7 +141,7 @@ public class Utility {
      */
     public static ArrayList<Pair> compressImages(List<String> imgList, int imageQuality) {
         ArrayList<Pair> list = new ArrayList<Pair>();
-        String imgFolder = Environment.getExternalStorageDirectory().toString() + "/CompressedImages/";
+        String imgFolder = Environment.getExternalStorageDirectory().toString() + "/" + Constants.COMPRESSED_IMAGE_FOLDER + "/";
         File folder = new File(imgFolder);
         if (! folder.exists()) {
             folder.mkdir();
@@ -343,11 +347,12 @@ public class Utility {
             imageFiles = Utility.getCameraImages(activity);
             Log.i(LOG_TAG_NAME, "Fetched " + imageFiles.size() + " images");
             if (imageFiles == null || imageFiles.size() == 0) {
+                dialogMessage = "No images available for compression...";
                 return imageList;
             }
             Log.i(LOG_TAG_NAME, "Begin compressing images - # of images found := " + imageFiles.size() + " with imageQuality := " + imgQuality);
 
-            String imgFolder = Environment.getExternalStorageDirectory().toString() + "/CompressedImages/";
+            String imgFolder = Environment.getExternalStorageDirectory().toString() + "/" + Constants.COMPRESSED_IMAGE_FOLDER + "/";
             File folder = new File(imgFolder);
             if (! folder.exists()) {
                 folder.mkdir();
@@ -366,6 +371,7 @@ public class Utility {
                 publishProgress(currentprogress);
             }
 
+            dialogMessage = "image compression completed...";
             Log.i(LOG_TAG_NAME, "image compression done");
             return imageList;
         }
@@ -382,6 +388,7 @@ public class Utility {
         protected void onPostExecute(List<Pair> result) {
             super.onPostExecute(result);
             Log.i(LOG_TAG_NAME, "progress dialog dismissed!");
+            Toast.makeText(activity, dialogMessage, Toast.LENGTH_SHORT).show();
             activity.updateGridView();
             if ( bDeleteImages && imageFiles != null) {
                 deleteImages(imageFiles); //Delete all original (uncompressed) images

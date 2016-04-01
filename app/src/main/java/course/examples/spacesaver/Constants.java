@@ -17,4 +17,6 @@ public interface Constants {
     public static final String SRC_FILE_SIZES = "SrcFileSizes";
     public static final String COMPRESSED_FILE_SIZES = "CompressedFileSizes";
     public static final String SPACE_SAVED_INFO = "SpaceSavedInfo";
+
+    public static final String COMPRESSED_IMAGE_FOLDER = "CompressedImages";
 }

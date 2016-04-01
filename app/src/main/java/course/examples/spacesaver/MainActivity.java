@@ -207,6 +207,9 @@ public class MainActivity extends Activity {
 
     public void updateGridView() {
         setGridViewAdapter(imageList);
+        if (imageList == null || imageList.size() == 0) {
+            return;
+        }
         spaceSavingMessage = Utility.calculateSpaceSaved(imageList);
         Toast.makeText(MainActivity.this, imageList.size() + " images compressed successfully...\n " + spaceSavingMessage, Toast.LENGTH_LONG ).show();
         populateImageSizes(); //must call this before deleting original images...
