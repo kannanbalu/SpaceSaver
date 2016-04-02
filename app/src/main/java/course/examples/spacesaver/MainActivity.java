@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -97,7 +98,24 @@ public class MainActivity extends Activity {
         });
 
         final TextView thresholdView = (TextView)findViewById(R.id.spaceThreshold);
+
         thresholdView.setText("Space Threshold: " + spaceThreshold + " / 100");
+
+        final Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        storageTextView.setText(Utility.getStorageCapacity());
+                        Log.i(LOG_TAG_NAME, "Updating current storage capacity on the UI...");
+                    }
+                });
+                handler.postDelayed(this, 10000);  //Update current storage capacity on the UI every 10 seconds
+            }
+        };
+        runnable.run();
 
         final SeekBar thresholdBar = (SeekBar)findViewById(R.id.thresholdBar);
         thresholdBar.setProgress(spaceThreshold);
@@ -140,45 +158,10 @@ public class MainActivity extends Activity {
                 imageList = new ArrayList<Pair>();
                 Utility.ImageCompressTask task = new Utility.ImageCompressTask(MainActivity.this);
                 task.execute(imgQuality, imageList, bDeleteImages);
-                try {
-                    //imageList = task.get();
-                } catch (Exception e) {
-                    Toast.makeText(MainActivity.this, "Image compression failed...", Toast.LENGTH_LONG ).show();
-                    btn.setEnabled(true);
-                    return;
-                }
+                storageTextView.setText(Utility.getStorageCapacity());
                 statsBtn.setEnabled(true);
                 btn.setEnabled(true);
             }
-            /*
-            @Override
-            public void onClick(View v) {
-                Log.i(LOG_TAG_NAME, "Fetching images on the device taken by camera");
-                statsBtn.setEnabled(false);
-                srcFileSizes = null;
-                compressedFileSizes = null;
-                List<String> imageFiles = Utility.getCameraImages(MainActivity.this);
-                if (imageFiles == null || imageFiles.size() == 0) {
-                    setGridViewAdapter(null);
-                    Toast.makeText(MainActivity.this, "No images present for compression...", Toast.LENGTH_LONG ).show();
-                    return;
-                }
-                Log.i(LOG_TAG_NAME, "Begin compressing images - # of images found := " + imageFiles.size() + " with imageQuality := " + imgQuality);
-                if (imageList != null) {
-                    imageList.clear();
-                }
-                Toast.makeText(MainActivity.this, "Image compression started... Please wait...", Toast.LENGTH_LONG ).show();
-                imageList = Utility.compressImages(imageFiles, imgQuality);
-                Log.i(LOG_TAG_NAME, "set the compressed image list to the grid view: # of images := " + imageList.size());
-                setGridViewAdapter(imageList);
-                spaceSavingMessage = Utility.calculateSpaceSaved(imageList);
-                Toast.makeText(MainActivity.this, imageList.size() + " images compressed successfully...\n " + spaceSavingMessage, Toast.LENGTH_LONG ).show();
-                statsBtn.setEnabled(true);
-                populateImageSizes(); //must call this before deleting original images...
-                if ( bDeleteImages) {
-                    Utility.deleteImages(imageFiles); //Delete all original (uncompressed) images
-                }
-            } */
         });
 
         gridView = (GridView)findViewById(R.id.imageGrid);
