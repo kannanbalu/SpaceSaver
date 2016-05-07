@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Utility class containing reusable and independent methods
+ * Utility class containing reusable and independent stateless methods to be used by other class in the package <br/>
  * Created by kannanb on 3/7/2016.
  */
 public class Utility {
@@ -29,11 +29,16 @@ public class Utility {
     public static final int MAX_IMAGES_TO_COMPRESS = 15;
     public static final int MAX_FILE_SIZE = 8; //8 MB file size
 
+    /**
+     * Method to return hashcode of a given path
+     * @param path path to be convered to its hashcode
+     * @return hashcode of the path provided
+     */
     public static String getBucketId(String path) {
         return String.valueOf(path.toLowerCase().hashCode());
     }
 
-    /*
+    /**
      * Retrieves list of images on the device from the location /DCIM/Camera
      * @param context Context used for querying content provider in retrieving images
      * @return returns a list containing absolute path to images on the device
@@ -76,7 +81,7 @@ public class Utility {
         return result;
     }
 
-    /*
+    /**
      * Deletes the first maxCount images from the provided list. The images are deleted from the physical device
      * @param imgList  list containing path to images that needs to be deleted
      * @param maxCount delete maxCount images from the imgList
@@ -93,7 +98,7 @@ public class Utility {
         }
     }
 
-    /*
+    /**
      * Deletes all the images from the provided list. The images are deleted from the physical device
      * @param imgList  list containing path to images that needs to be deleted
      */
@@ -101,7 +106,7 @@ public class Utility {
         deleteImages(imgList, imgList.size());
     }
 
-    /*
+    /**
      * Deletes imageFile from the physical device
      * @param imgFile file to be deleted
      */
@@ -111,7 +116,7 @@ public class Utility {
         }
     }
 
-    /*
+    /**
      * Method to evaluate the space saved as a result of compressed images
      * @param pairs A list of Pair objects (containing source file and compressed image)
      * @return A string containing information on space occupied by original images, compressed images and total savings
@@ -133,7 +138,7 @@ public class Utility {
         return savedString;
     }
 
-    /*
+    /**
      * Method to compress all the images in a given list of images of desired image quality
      * @param imgList  A list of images that needs to be compressed
      * @param imageQuality Images to be compressed of the desired quality
@@ -157,7 +162,7 @@ public class Utility {
         return list;
     }
 
-    /*
+    /**
      * Method to compress an image of the desired image quality and place the generated compressed image in the imgFolder
      * @param imgFile Absolute path to image file that needs to be compressed
      * @param imageQuality The quality level of the compressed image
@@ -192,7 +197,7 @@ public class Utility {
         return null;
     }
 
-    /*
+    /**
      * Method to print the storage capacity details (total, used, free)
      * @return String containing details on the capacity details
      */
@@ -245,11 +250,11 @@ public class Utility {
         }
     }
 
-    /*
+    /**
      * Method to retrieve the percentage of space used on the device
      * @return percentage of space used on the device
      */
-    public long getUsedSpacePercentage() {
+    public static long getUsedSpacePercentage() {
         StatFs sfs = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
         long usedPercentage = 0;
         try {
@@ -283,9 +288,9 @@ public class Utility {
         return usedPercentage;
     }
 
-    /*
+    /**
      * Method to retrieve a string containing size of a file in bytes, Kbytes, Mbytes, Gbytes based on the size provided in bytes
-     * @param filsize  Size of a file in bytes
+     * @param filesize  Size of a file in bytes
      * @return Return a string containing the size converted to K, M, G bytes
      */
     public static String getSizeInString(long filesize) {
@@ -306,20 +311,33 @@ public class Utility {
         return sizeStr;
     }
 
+    /**
+     * Method to convert a filesize in bytes to Mega bytes
+     * @param filesize in bytes
+     * @return size in Mega bytes
+     */
     public static double getSizeInMbytes(long filesize) {
         double size = filesize;
         size = size / (KILOBYTE * KILOBYTE);
         return size;
     }
 
+    /**
+     * Class to perform the image compression operation in a background thread
+     */
     public static class ImageCompressTask extends AsyncTask<Object, Integer, List<Pair>> {
 
         private ProgressDialog dialog = null;
-        private MainActivity activity = null;
+        private MainActivity  activity = null;
         private boolean bDeleteImages = false;
         private List<String> imageFiles = null;
+
         private String dialogMessage = "";
 
+        /**
+         * Constructor to initialize the class fields and prepare a UI dialog to display progress on the task to be performed
+         * @param context
+         */
         public ImageCompressTask(MainActivity context) {
             activity = context;
             dialog = new ProgressDialog(context);
@@ -330,6 +348,9 @@ public class Utility {
             dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         }
 
+        /**
+         * Method to launch a UI dialog to indicate start of the operation to the user
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -337,6 +358,11 @@ public class Utility {
             dialog.show();
         }
 
+        /**
+         * Method to perform compression of chosen images on the device, all in the background thread
+         * @param params  Additional parameter if any to be passed on to the AsyncTask
+         * @return list containing path to both source images and the corresponding compressed images
+         */
         @Override
         protected List<Pair> doInBackground(Object... params) {
             int imgQuality = (int)params[0];
@@ -376,6 +402,10 @@ public class Utility {
             return imageList;
         }
 
+        /**
+         * Method used to show the current state of the progress in a UI dialog to the user
+         * @param value current progress value to be shown on the UI dialog
+         */
         @Override
         protected void onProgressUpdate(Integer... value) {
             super.onProgressUpdate(value);
@@ -384,6 +414,11 @@ public class Utility {
             dialog.setProgress(value[0]);
         }
 
+        /**
+         * Method to clean up the UI dialog and give the caller of this class to perform any post task operation to be performed on the UI
+         * Also deletes all the original images on the device
+         * @param result containing the success or failure of the task performed
+         */
         @Override
         protected void onPostExecute(List<Pair> result) {
             super.onPostExecute(result);

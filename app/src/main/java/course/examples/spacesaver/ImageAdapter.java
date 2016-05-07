@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Class for rendering a set of images passed to it. Images can be of any type (BMP, PNG, GIF, JPG)
  * Created by kannanb on 3/8/2016.
  */
 public class ImageAdapter extends BaseAdapter {
@@ -33,18 +34,31 @@ public class ImageAdapter extends BaseAdapter {
 
     private Paint paint = new Paint();
 
+    /**
+     * Constructor taking a context and a list of images as parameters
+     * @param c  Context passed to the imageadapter
+     * @param list List of images to be rendered
+     */
     public ImageAdapter(Context c, List<Pair> list) {
         context = c;
         imgList = list;
         initialize();
     }
 
+    /**
+     * Method to initialize the paint configuration (Color, Style, Font Size)
+     */
     private void initialize() {
         paint.setColor(Color.GREEN);
         paint.setStyle(Paint.Style.FILL);
         paint.setTextSize(25);
     }
 
+    /**
+     * Method to reinitialize the adapter with a new context and list of images
+     * @param c Context passed to the imageadapter
+     * @param list List of images to be rendered
+     */
     public void reInitialize(Context c, List<Pair> list) {
         context = c;
         bmpList.clear();
@@ -52,16 +66,29 @@ public class ImageAdapter extends BaseAdapter {
         imgList = list;
     }
 
+    /**
+     * Method to reset a new list of images to the adapter for rendering
+     * @param list List of images to be rendered
+     */
     public void setImages(List<Pair> list) {
         imgList = list;
     }
 
+    /**
+     * Method to get the number of images to be rendered
+     * @return number of images
+     */
     @Override
     public int getCount() {
         Log.i(LOG_TAG_NAME, "getCount() returned: " + imgList.size() * 2);
         return imgList.size() * 2;
     }
 
+    /**
+     * Method to return the image data for a given position in the view
+     * @param position Index of the image to be rendered
+     * @return a BmpData structure containing the bitmap and path to the image file on the device storage
+     */
     @Override
     public BmpData getItem(int position) {
         Log.i(LOG_TAG_NAME, "getItem");
@@ -92,11 +119,23 @@ public class ImageAdapter extends BaseAdapter {
         return null;
     }
 
+    /**
+     * Return the id of the item for a given position
+     * @param position index of the item
+     * @return
+     */
     @Override
     public long getItemId(int position) {
         return 0;
     }
 
+    /**
+     * Method to calculate the sample size from the options provided in BitmapFactory
+     * @param options contains the desired options in BitmapFactory
+     * @param reqWidth width of the image
+     * @param reqHeight height of the image
+     * @return sample size from the options provided
+     */
     public static int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
@@ -121,6 +160,14 @@ public class ImageAdapter extends BaseAdapter {
         return inSampleSize;
     }
 
+    /**
+     * Method to return the bitmap data of a given image file
+     * @param imgFile Path to the image file on the device storage
+     * @param reqWidth required width of the decoded image
+     * @param reqHeight required height of the decoded image
+     * @return a Bitmap with dimension as specified in reqWidth and reqHeight parameters
+     * @throws Exception
+     */
     public  Bitmap decodeSampledBitmapFromResource(File imgFile,int reqWidth, int reqHeight) throws Exception {
 
         final BitmapFactory.Options options = new BitmapFactory.Options();

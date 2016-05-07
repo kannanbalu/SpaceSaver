@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
+ * Activity class to render a single image in an Image View alongwith its path on the local storage
  * Created by kannanb on 3/14/2016.
  */
 public class ImageViewer extends Activity {
@@ -38,6 +39,10 @@ public class ImageViewer extends Activity {
     float oldDist = 1f;
 
 
+    /**
+     * Method to initialize UI components of the class and prepare for user interactions .
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +70,11 @@ public class ImageViewer extends Activity {
         matrix.setTranslate(top, left);
     }
 
+    /**
+     * Method to handle touch events on the image
+     * @param event type of touch event triggered (for moving the image, zoom in / zoom out the image)
+     * @return if the event is consumed or not
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
@@ -125,13 +135,11 @@ public class ImageViewer extends Activity {
         return true; // event is consumed
     }
 
-    /*
-     * --------------------------------------------------------------------------
-     * Method: spacing Parameters: MotionEvent Returns: float Description:
-     * checks the spacing between the two fingers on touch
-     * ----------------------------------------------------
+    /**
+     * Method to check the spacing between the two fingers on touch
+     * @param event containing position of the two fingers
+     * @return spacing between the two fingers
      */
-
     private float spacing(MotionEvent event)
     {
         float x = event.getX(0) - event.getX(1);
@@ -139,13 +147,11 @@ public class ImageViewer extends Activity {
         return (float)Math.sqrt(x * x + y * y);
     }
 
-    /*
-     * --------------------------------------------------------------------------
-     * Method: midPoint Parameters: PointF object, MotionEvent Returns: void
-     * Description: calculates the midpoint between the two fingers
-     * ------------------------------------------------------------
+    /**
+     * Method to calculate the midpoint between the two fingers
+     * @param point Point structure to be filled in with the mid point
+     * @param event Event containing the current position of two fingers
      */
-
     private void midPoint(PointF point, MotionEvent event)
     {
         float x = event.getX(0) + event.getX(1);

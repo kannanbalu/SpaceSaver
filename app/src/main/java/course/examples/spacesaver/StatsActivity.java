@@ -35,6 +35,10 @@ public class StatsActivity extends Activity {
     private String sizestr = "Mbytes";
     private String spaceSavedMessage = "";
 
+    /**
+     * Method to initialize UI components and populate the chart with data on all the source and compressed images.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

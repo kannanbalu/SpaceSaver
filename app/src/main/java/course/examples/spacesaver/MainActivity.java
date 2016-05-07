@@ -21,6 +21,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity class containing widgets for user to control space savings on the device storage
+ */
 public class MainActivity extends Activity {
 
     private SharedPreferences prefs = null;
@@ -36,9 +39,18 @@ public class MainActivity extends Activity {
     private String spaceSavingMessage = "";
     private long [] srcFileSizes = null;
     private long [] compressedFileSizes = null;
+    private Intent serviceIntent = null;
 
     public static final String LOG_TAG_NAME = "SpaceSaver.MainActivity";
 
+    /**
+     * Method that performs the following operations <br/>
+     * Initialize the widgets <br/>
+     * Initialize seekbars (ImageQuality, Space Threshold with the values chosen by the user the last time) <br/>
+     * Listeners for the button widgets <br/>
+     * Initialize grid view that will contain two columns (original and compressed images) <br/>
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +59,7 @@ public class MainActivity extends Activity {
         prefs = getSharedPreferences(Constants.USER_PREFERENCE, 0);
 
         imgQuality = prefs.getInt(Constants.IMAGE_QUALITY, 80);
-        spaceThreshold = prefs.getInt(Constants.SPACE_THRESHOLD, 90);
+        spaceThreshold = prefs.getInt(Constants.SPACE_THRESHOLD, 12);
         bDeleteImages = prefs.getBoolean(Constants.DELETE_IMAGES, false);
 
         final TextView tView = (TextView)findViewById(R.id.qualityText);
@@ -105,6 +117,18 @@ public class MainActivity extends Activity {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
+
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        storageTextView.setText("Updating...");
+                    }
+                });
+                try {
+                       Thread.sleep(1000);
+                } catch (Exception e) {
+
+                }
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -186,8 +210,19 @@ public class MainActivity extends Activity {
             }
         });
         statsBtn.setEnabled(false);
+
+        if (false && serviceIntent == null) {
+            serviceIntent = new Intent(MainActivity.this, SpaceSaverService.class);
+            serviceIntent.putExtra(Constants.IMAGE_QUALITY, imgQuality);
+            serviceIntent.putExtra(Constants.DELETE_IMAGES, bDeleteImages);
+            serviceIntent.putExtra(Constants.USED_SPACE_THRESHOLD, spaceThreshold);
+            startService(serviceIntent);
+        }
     }
 
+    /**
+     * Method to update the grid view with the newly compressed images
+     */
     public void updateGridView() {
         setGridViewAdapter(imageList);
         if (imageList == null || imageList.size() == 0) {
@@ -198,6 +233,10 @@ public class MainActivity extends Activity {
         populateImageSizes(); //must call this before deleting original images...
      }
 
+    /**
+     * Method for populating two lists (original images and compressed images) with their size.
+     * This method needs to be called for displaying comparison on the space savings at image level in a line chart
+     */
     public void populateImageSizes() {
         ArrayList<String> list = getImagesList();
         srcFileSizes = new long[imageList.size()];
@@ -211,6 +250,10 @@ public class MainActivity extends Activity {
         Log.i(LOG_TAG_NAME, "# of source files length: " + srcFileSizes.length);
     }
 
+    /**
+     * Method to return a list containing pairs of the source image and the compressed image
+     * @return a list containing pairs of the source image and the compressed image
+     */
     public ArrayList<String> getImagesList() {
         ArrayList<String> list = new ArrayList<String>();
         if (imageList == null) return list; //return empty list
@@ -221,6 +264,10 @@ public class MainActivity extends Activity {
         return list;
     }
 
+    /**
+     * Method to reset the grid view with a new set of images
+     * @param list List containing a set of images (original and compressed images)
+     */
     public void setGridViewAdapter(List<Pair> list) {
             if (list == null || list.size() == 0) {
                 gridView.setAdapter(null);
@@ -232,27 +279,5 @@ public class MainActivity extends Activity {
                 imageAdapter.reInitialize(this, list);
             }
             gridView.setAdapter(imageAdapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

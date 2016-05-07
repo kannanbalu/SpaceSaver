@@ -1,7 +1,7 @@
 package course.examples.spacesaver;
 
 /**
- * Interface containing a few constants
+ * Interface containing a few constants used by other classes in the package
  * Created by kannanb on 3/29/2016.
  */
 public interface Constants {
@@ -19,4 +19,6 @@ public interface Constants {
     public static final String SPACE_SAVED_INFO = "SpaceSavedInfo";
 
     public static final String COMPRESSED_IMAGE_FOLDER = "CompressedImages";
+
+    public static final String USED_SPACE_THRESHOLD = "UsedSpaceThreshold";
 }
