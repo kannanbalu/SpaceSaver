@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classcourse_1_1examples_1_1spacesaver_1_1_pair.html" title="course.examples.spacesaver.Pair" alt="" coords="5,5,223,32"/>
+<area shape="rect" id="node2" href="$classcourse_1_1examples_1_1spacesaver_1_1_image_viewer.html" title="course.examples.spacesaver.\lImageViewer" alt="" coords="117,5,312,47"/>
+<area shape="rect" id="node3" href="$classcourse_1_1examples_1_1spacesaver_1_1_main_activity.html" title="course.examples.spacesaver.\lMainActivity" alt="" coords="117,71,312,112"/>
+<area shape="rect" id="node4" href="$classcourse_1_1examples_1_1spacesaver_1_1_stats_activity.html" title="course.examples.spacesaver.\lStatsActivity" alt="" coords="117,136,312,177"/>
 </map>

@@ -23,20 +23,16 @@ Collaboration diagram for course.\+examples.\+spacesaver.\+Main\+Activity\+:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a481dd05c78e456ac48a34a89ac0e3671}{update\+Grid\+View} ()
+\item 
+void \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_ac490d48da8ace7738b01cff2e28aee1d}{populate\+Image\+Sizes} ()
+\item 
+Array\+List$<$ String $>$ \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a1ce9342bbb09b808ddafc08b9ba3fbf6}{get\+Images\+List} ()
+\item 
 void \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a53620ebc69e8c3b33626ede6c952cc6c}{set\+Grid\+View\+Adapter} (List$<$ \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_pair}{Pair} $>$ list)
-\item 
-boolean \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a02f312998957aefd4c7a932532e48615}{on\+Create\+Options\+Menu} (Menu menu)
-\item 
-boolean \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a819d87dc906ff944c4f60cc044f05498}{on\+Options\+Item\+Selected} (Menu\+Item item)
 \end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
-\item 
-static final String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a62fba147272fa9f0399c82fdd08dbc82}{U\+S\+E\+R\+\_\+\+P\+R\+E\+F\+E\+R\+E\+N\+C\+E} = \char`\"{}User\+Prefs\char`\"{}
-\item 
-static final String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a02332766acdcc44702cbfaee00c0b7ec}{I\+M\+A\+G\+E\+\_\+\+Q\+U\+A\+L\+I\+T\+Y} = \char`\"{}Image\+Quality\char`\"{}
-\item 
-static final String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a73bec883ca93d8c9c0691b1233f08f38}{S\+P\+A\+C\+E\+\_\+\+T\+H\+R\+E\+S\+H\+O\+L\+D} = \char`\"{}Space\+Threshold\char`\"{}
 \item 
 static final String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a3151df70b338956cfe81e014cfba50fc}{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E} = \char`\"{}Space\+Saver.\+Main\+Activity\char`\"{}
 \end{DoxyCompactItemize}
@@ -47,7 +43,20 @@ void \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a03e5171
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+Activity class containing widgets for user to control space savings on the device storage 
+
 \subsection{Member Function Documentation}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a1ce9342bbb09b808ddafc08b9ba3fbf6}{}\index{course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}!get\+Images\+List@{get\+Images\+List}}
+\index{get\+Images\+List@{get\+Images\+List}!course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}}
+\subsubsection[{get\+Images\+List()}]{\setlength{\rightskip}{0pt plus 5cm}Array\+List$<$String$>$ course.\+examples.\+spacesaver.\+Main\+Activity.\+get\+Images\+List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a1ce9342bbb09b808ddafc08b9ba3fbf6}
+Method to return a list containing pairs of the source image and the compressed image \begin{DoxyReturn}{Returns}
+a list containing pairs of the source image and the compressed image 
+\end{DoxyReturn}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a03e5171f1ff658442936a03ef4caf7a3}{}\index{course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}!on\+Create@{on\+Create}}
 \index{on\+Create@{on\+Create}!course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}}
 \subsubsection[{on\+Create(\+Bundle saved\+Instance\+State)}]{\setlength{\rightskip}{0pt plus 5cm}void course.\+examples.\+spacesaver.\+Main\+Activity.\+on\+Create (
@@ -55,42 +64,48 @@ void \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a03e5171
 \item[{Bundle}]{saved\+Instance\+State}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [protected]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a03e5171f1ff658442936a03ef4caf7a3}
-\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a02f312998957aefd4c7a932532e48615}{}\index{course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}!on\+Create\+Options\+Menu@{on\+Create\+Options\+Menu}}
-\index{on\+Create\+Options\+Menu@{on\+Create\+Options\+Menu}!course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}}
-\subsubsection[{on\+Create\+Options\+Menu(\+Menu menu)}]{\setlength{\rightskip}{0pt plus 5cm}boolean course.\+examples.\+spacesaver.\+Main\+Activity.\+on\+Create\+Options\+Menu (
+Method that performs the following operations ~\newline
+ Initialize the widgets ~\newline
+ Initialize seekbars (Image\+Quality, Space Threshold with the values chosen by the user the last time) ~\newline
+ Listeners for the button widgets ~\newline
+ Initialize grid view that will contain two columns (original and compressed images) ~\newline
+ 
+\begin{DoxyParams}{Parameters}
+{\em saved\+Instance\+State} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_ac490d48da8ace7738b01cff2e28aee1d}{}\index{course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}!populate\+Image\+Sizes@{populate\+Image\+Sizes}}
+\index{populate\+Image\+Sizes@{populate\+Image\+Sizes}!course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}}
+\subsubsection[{populate\+Image\+Sizes()}]{\setlength{\rightskip}{0pt plus 5cm}void course.\+examples.\+spacesaver.\+Main\+Activity.\+populate\+Image\+Sizes (
 \begin{DoxyParamCaption}
-\item[{Menu}]{menu}
+{}
 \end{DoxyParamCaption}
-)}\label{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a02f312998957aefd4c7a932532e48615}
-\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a819d87dc906ff944c4f60cc044f05498}{}\index{course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}!on\+Options\+Item\+Selected@{on\+Options\+Item\+Selected}}
-\index{on\+Options\+Item\+Selected@{on\+Options\+Item\+Selected}!course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}}
-\subsubsection[{on\+Options\+Item\+Selected(\+Menu\+Item item)}]{\setlength{\rightskip}{0pt plus 5cm}boolean course.\+examples.\+spacesaver.\+Main\+Activity.\+on\+Options\+Item\+Selected (
-\begin{DoxyParamCaption}
-\item[{Menu\+Item}]{item}
-\end{DoxyParamCaption}
-)}\label{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a819d87dc906ff944c4f60cc044f05498}
-\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a53620ebc69e8c3b33626ede6c952cc6c}{}\index{course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}!set\+Grid\+View\+Adapter@{set\+Grid\+View\+Adapter}}
+)}\label{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_ac490d48da8ace7738b01cff2e28aee1d}
+Method for populating two lists (original images and compressed images) with their size. This method needs to be called for displaying comparison on the space savings at image level in a line chart \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a53620ebc69e8c3b33626ede6c952cc6c}{}\index{course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}!set\+Grid\+View\+Adapter@{set\+Grid\+View\+Adapter}}
 \index{set\+Grid\+View\+Adapter@{set\+Grid\+View\+Adapter}!course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}}
 \subsubsection[{set\+Grid\+View\+Adapter(\+List$<$ Pair $>$ list)}]{\setlength{\rightskip}{0pt plus 5cm}void course.\+examples.\+spacesaver.\+Main\+Activity.\+set\+Grid\+View\+Adapter (
 \begin{DoxyParamCaption}
 \item[{List$<$ {\bf Pair} $>$}]{list}
 \end{DoxyParamCaption}
 )}\label{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a53620ebc69e8c3b33626ede6c952cc6c}
-
+Method to reset the grid view with a new set of images 
+\begin{DoxyParams}{Parameters}
+{\em list} & List containing a set of images (original and compressed images) \\
+\hline
+\end{DoxyParams}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a481dd05c78e456ac48a34a89ac0e3671}{}\index{course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}!update\+Grid\+View@{update\+Grid\+View}}
+\index{update\+Grid\+View@{update\+Grid\+View}!course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}}
+\subsubsection[{update\+Grid\+View()}]{\setlength{\rightskip}{0pt plus 5cm}void course.\+examples.\+spacesaver.\+Main\+Activity.\+update\+Grid\+View (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a481dd05c78e456ac48a34a89ac0e3671}
+Method to update the grid view with the newly compressed images 
 
 \subsection{Member Data Documentation}
-\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a02332766acdcc44702cbfaee00c0b7ec}{}\index{course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}!I\+M\+A\+G\+E\+\_\+\+Q\+U\+A\+L\+I\+T\+Y@{I\+M\+A\+G\+E\+\_\+\+Q\+U\+A\+L\+I\+T\+Y}}
-\index{I\+M\+A\+G\+E\+\_\+\+Q\+U\+A\+L\+I\+T\+Y@{I\+M\+A\+G\+E\+\_\+\+Q\+U\+A\+L\+I\+T\+Y}!course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}}
-\subsubsection[{I\+M\+A\+G\+E\+\_\+\+Q\+U\+A\+L\+I\+T\+Y}]{\setlength{\rightskip}{0pt plus 5cm}final String course.\+examples.\+spacesaver.\+Main\+Activity.\+I\+M\+A\+G\+E\+\_\+\+Q\+U\+A\+L\+I\+T\+Y = \char`\"{}Image\+Quality\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a02332766acdcc44702cbfaee00c0b7ec}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a3151df70b338956cfe81e014cfba50fc}{}\index{course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}!L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E@{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E}}
 \index{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E@{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E}!course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}}
 \subsubsection[{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E}]{\setlength{\rightskip}{0pt plus 5cm}final String course.\+examples.\+spacesaver.\+Main\+Activity.\+L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E = \char`\"{}Space\+Saver.\+Main\+Activity\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a3151df70b338956cfe81e014cfba50fc}
-\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a73bec883ca93d8c9c0691b1233f08f38}{}\index{course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}!S\+P\+A\+C\+E\+\_\+\+T\+H\+R\+E\+S\+H\+O\+L\+D@{S\+P\+A\+C\+E\+\_\+\+T\+H\+R\+E\+S\+H\+O\+L\+D}}
-\index{S\+P\+A\+C\+E\+\_\+\+T\+H\+R\+E\+S\+H\+O\+L\+D@{S\+P\+A\+C\+E\+\_\+\+T\+H\+R\+E\+S\+H\+O\+L\+D}!course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}}
-\subsubsection[{S\+P\+A\+C\+E\+\_\+\+T\+H\+R\+E\+S\+H\+O\+L\+D}]{\setlength{\rightskip}{0pt plus 5cm}final String course.\+examples.\+spacesaver.\+Main\+Activity.\+S\+P\+A\+C\+E\+\_\+\+T\+H\+R\+E\+S\+H\+O\+L\+D = \char`\"{}Space\+Threshold\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a73bec883ca93d8c9c0691b1233f08f38}
-\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a62fba147272fa9f0399c82fdd08dbc82}{}\index{course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}!U\+S\+E\+R\+\_\+\+P\+R\+E\+F\+E\+R\+E\+N\+C\+E@{U\+S\+E\+R\+\_\+\+P\+R\+E\+F\+E\+R\+E\+N\+C\+E}}
-\index{U\+S\+E\+R\+\_\+\+P\+R\+E\+F\+E\+R\+E\+N\+C\+E@{U\+S\+E\+R\+\_\+\+P\+R\+E\+F\+E\+R\+E\+N\+C\+E}!course\+::examples\+::spacesaver\+::\+Main\+Activity@{course\+::examples\+::spacesaver\+::\+Main\+Activity}}
-\subsubsection[{U\+S\+E\+R\+\_\+\+P\+R\+E\+F\+E\+R\+E\+N\+C\+E}]{\setlength{\rightskip}{0pt plus 5cm}final String course.\+examples.\+spacesaver.\+Main\+Activity.\+U\+S\+E\+R\+\_\+\+P\+R\+E\+F\+E\+R\+E\+N\+C\+E = \char`\"{}User\+Prefs\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_main_activity_a62fba147272fa9f0399c82fdd08dbc82}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

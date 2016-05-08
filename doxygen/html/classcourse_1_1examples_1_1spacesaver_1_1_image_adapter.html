@@ -141,7 +141,7 @@ Static Public Attributes</h2></td></tr>
 <tr class="separator:a6cf088221e1ed475f35d61db7ff3f4a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Created by kannanb on 3/8/2016. </p>
+<div class="textblock"><p>Class for rendering a set of images passed to it. Images can be of any type (BMP, PNG, GIF, JPG) Created by kannanb on 3/8/2016. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a4a64ff6f4afb032a7b909d452da4d0f7"></a>
 <div class="memitem">
@@ -166,6 +166,13 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Constructor taking a context and a list of images as parameters </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>Context passed to the imageadapter </td></tr>
+    <tr><td class="paramname">list</td><td>List of images to be rendered </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -207,6 +214,15 @@ Static Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Method to calculate the sample size from the options provided in BitmapFactory </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">options</td><td>contains the desired options in BitmapFactory </td></tr>
+    <tr><td class="paramname">reqWidth</td><td>width of the image </td></tr>
+    <tr><td class="paramname">reqHeight</td><td>height of the image </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>sample size from the options provided </dd></dl>
 
 </div>
 </div>
@@ -239,6 +255,21 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Method to return the bitmap data of a given image file </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">imgFile</td><td>Path to the image file on the device storage </td></tr>
+    <tr><td class="paramname">reqWidth</td><td>required width of the decoded image </td></tr>
+    <tr><td class="paramname">reqHeight</td><td>required height of the decoded image </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a Bitmap with dimension as specified in reqWidth and reqHeight parameters </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -254,6 +285,7 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Method to get the number of images to be rendered </p><dl class="section return"><dt>Returns</dt><dd>number of images </dd></dl>
 
 </div>
 </div>
@@ -270,6 +302,13 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Method to return the image data for a given position in the view </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>Index of the image to be rendered </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="classcourse_1_1examples_1_1spacesaver_1_1_bmp_data.html">BmpData</a> structure containing the bitmap and path to the image file on the device storage </dd></dl>
 
 </div>
 </div>
@@ -286,6 +325,13 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Return the id of the item for a given position </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>index of the item </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>
@@ -344,6 +390,13 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Method to reinitialize the adapter with a new context and list of images </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>Context passed to the imageadapter </td></tr>
+    <tr><td class="paramname">list</td><td>List of images to be rendered </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -360,6 +413,12 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Method to reset a new list of images to the adapter for rendering </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>List of images to be rendered </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

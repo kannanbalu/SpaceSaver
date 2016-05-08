@@ -1,5 +1,10 @@
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility}{}\section{course.\+examples.\+spacesaver.\+Utility Class Reference}
 \label{classcourse_1_1examples_1_1spacesaver_1_1_utility}\index{course.\+examples.\+spacesaver.\+Utility@{course.\+examples.\+spacesaver.\+Utility}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Image\+Compress\+Task}
+\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -9,6 +14,10 @@ static List$<$ String $>$ \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_u
 \item 
 static void \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a534b914baf6a7ef4d7f681a7d56e4da6}{delete\+Images} (List$<$ String $>$ img\+List, int max\+Count)
 \item 
+static void \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a0b699bacd4fbbf65e427f211fc25a02b}{delete\+Images} (List$<$ String $>$ img\+List)
+\item 
+static void \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a410f3b952b4a853e0925dd816cf34237}{delete\+Image} (File img\+File)
+\item 
 static String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a6e99256bde02985ef71df62265c56217}{calculate\+Space\+Saved} (List$<$ \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_pair}{Pair} $>$ pairs)
 \item 
 static Array\+List$<$ \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_pair}{Pair} $>$ \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a5029adf50e50346e2bb08bb1557ed064}{compress\+Images} (List$<$ String $>$ img\+List, int image\+Quality)
@@ -17,7 +26,11 @@ static String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a8f16
 \item 
 static String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a52b2d0846affd9ee60328055d871f4df}{get\+Storage\+Capacity} ()
 \item 
+static long \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_ad042fcb059f4401bc0a278735db91646}{get\+Used\+Space\+Percentage} ()
+\item 
 static String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_aba39539a00ba3e4d7c74198092926dee}{get\+Size\+In\+String} (long filesize)
+\item 
+static double \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a151cd0a1aae29fb3efdf0af4ed402673}{get\+Size\+In\+Mbytes} (long filesize)
 \end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
@@ -27,11 +40,14 @@ static final String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility
 static final long \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a291dacb443d1ba16e25c95b0b436b6ec}{K\+I\+L\+O\+B\+Y\+T\+E} = 1024
 \item 
 static final int \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a8953f2c1e57838e6e76c22071b4e5a02}{M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S} = 15
+\item 
+static final int \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility_a633bce4a44e4cab909e8bac6bbc4caab}{M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+Z\+E} = 8
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Created by kannanb on 3/7/2016. 
+\hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_utility}{Utility} class containing reusable and independent stateless methods to be used by other class in the package ~\newline
+ Created by kannanb on 3/7/2016. 
 
 \subsection{Member Function Documentation}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a6e99256bde02985ef71df62265c56217}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!calculate\+Space\+Saved@{calculate\+Space\+Saved}}
@@ -41,6 +57,14 @@ Created by kannanb on 3/7/2016.
 \item[{List$<$ {\bf Pair} $>$}]{pairs}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a6e99256bde02985ef71df62265c56217}
+Method to evaluate the space saved as a result of compressed images 
+\begin{DoxyParams}{Parameters}
+{\em pairs} & A list of \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_pair}{Pair} objects (containing source file and compressed image) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A string containing information on space occupied by original images, compressed images and total savings 
+\end{DoxyReturn}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a8f1697a3c166596b60f83c21d23162fb}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!compress\+Image@{compress\+Image}}
 \index{compress\+Image@{compress\+Image}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
 \subsubsection[{compress\+Image(\+String img\+File, int image\+Quality, String img\+Folder)}]{\setlength{\rightskip}{0pt plus 5cm}static String course.\+examples.\+spacesaver.\+Utility.\+compress\+Image (
@@ -50,6 +74,18 @@ Created by kannanb on 3/7/2016.
 \item[{String}]{img\+Folder}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a8f1697a3c166596b60f83c21d23162fb}
+Method to compress an image of the desired image quality and place the generated compressed image in the img\+Folder 
+\begin{DoxyParams}{Parameters}
+{\em img\+File} & Absolute path to image file that needs to be compressed \\
+\hline
+{\em image\+Quality} & The quality level of the compressed image \\
+\hline
+{\em img\+Folder} & Path to the location where the generated compressed image needs to be placed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Absolute path to the newly generated image 
+\end{DoxyReturn}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a5029adf50e50346e2bb08bb1557ed064}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!compress\+Images@{compress\+Images}}
 \index{compress\+Images@{compress\+Images}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
 \subsubsection[{compress\+Images(\+List$<$ String $>$ img\+List, int image\+Quality)}]{\setlength{\rightskip}{0pt plus 5cm}static Array\+List$<${\bf Pair}$>$ course.\+examples.\+spacesaver.\+Utility.\+compress\+Images (
@@ -58,6 +94,28 @@ Created by kannanb on 3/7/2016.
 \item[{int}]{image\+Quality}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a5029adf50e50346e2bb08bb1557ed064}
+Method to compress all the images in a given list of images of desired image quality 
+\begin{DoxyParams}{Parameters}
+{\em img\+List} & A list of images that needs to be compressed \\
+\hline
+{\em image\+Quality} & Images to be compressed of the desired quality \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a list of \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_pair}{Pair} objects containing path to source and compressed image 
+\end{DoxyReturn}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a410f3b952b4a853e0925dd816cf34237}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!delete\+Image@{delete\+Image}}
+\index{delete\+Image@{delete\+Image}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
+\subsubsection[{delete\+Image(\+File img\+File)}]{\setlength{\rightskip}{0pt plus 5cm}static void course.\+examples.\+spacesaver.\+Utility.\+delete\+Image (
+\begin{DoxyParamCaption}
+\item[{File}]{img\+File}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a410f3b952b4a853e0925dd816cf34237}
+Deletes image\+File from the physical device 
+\begin{DoxyParams}{Parameters}
+{\em img\+File} & file to be deleted \\
+\hline
+\end{DoxyParams}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a534b914baf6a7ef4d7f681a7d56e4da6}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!delete\+Images@{delete\+Images}}
 \index{delete\+Images@{delete\+Images}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
 \subsubsection[{delete\+Images(\+List$<$ String $>$ img\+List, int max\+Count)}]{\setlength{\rightskip}{0pt plus 5cm}static void course.\+examples.\+spacesaver.\+Utility.\+delete\+Images (
@@ -66,6 +124,25 @@ Created by kannanb on 3/7/2016.
 \item[{int}]{max\+Count}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a534b914baf6a7ef4d7f681a7d56e4da6}
+Deletes the first max\+Count images from the provided list. The images are deleted from the physical device 
+\begin{DoxyParams}{Parameters}
+{\em img\+List} & list containing path to images that needs to be deleted \\
+\hline
+{\em max\+Count} & delete max\+Count images from the img\+List \\
+\hline
+\end{DoxyParams}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a0b699bacd4fbbf65e427f211fc25a02b}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!delete\+Images@{delete\+Images}}
+\index{delete\+Images@{delete\+Images}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
+\subsubsection[{delete\+Images(\+List$<$ String $>$ img\+List)}]{\setlength{\rightskip}{0pt plus 5cm}static void course.\+examples.\+spacesaver.\+Utility.\+delete\+Images (
+\begin{DoxyParamCaption}
+\item[{List$<$ String $>$}]{img\+List}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a0b699bacd4fbbf65e427f211fc25a02b}
+Deletes all the images from the provided list. The images are deleted from the physical device 
+\begin{DoxyParams}{Parameters}
+{\em img\+List} & list containing path to images that needs to be deleted \\
+\hline
+\end{DoxyParams}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_afb38a3ff9ea902240c74adad9d975b80}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!get\+Bucket\+Id@{get\+Bucket\+Id}}
 \index{get\+Bucket\+Id@{get\+Bucket\+Id}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
 \subsubsection[{get\+Bucket\+Id(\+String path)}]{\setlength{\rightskip}{0pt plus 5cm}static String course.\+examples.\+spacesaver.\+Utility.\+get\+Bucket\+Id (
@@ -73,6 +150,14 @@ Created by kannanb on 3/7/2016.
 \item[{String}]{path}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_afb38a3ff9ea902240c74adad9d975b80}
+Method to return hashcode of a given path 
+\begin{DoxyParams}{Parameters}
+{\em path} & path to be convered to its hashcode \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+hashcode of the path provided 
+\end{DoxyReturn}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a7d516823eb324565737ea69a39e604f9}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!get\+Camera\+Images@{get\+Camera\+Images}}
 \index{get\+Camera\+Images@{get\+Camera\+Images}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
 \subsubsection[{get\+Camera\+Images(\+Context context)}]{\setlength{\rightskip}{0pt plus 5cm}static List$<$String$>$ course.\+examples.\+spacesaver.\+Utility.\+get\+Camera\+Images (
@@ -80,6 +165,29 @@ Created by kannanb on 3/7/2016.
 \item[{Context}]{context}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a7d516823eb324565737ea69a39e604f9}
+Retrieves list of images on the device from the location /\+D\+C\+I\+M/\+Camera 
+\begin{DoxyParams}{Parameters}
+{\em context} & Context used for querying content provider in retrieving images \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns a list containing absolute path to images on the device 
+\end{DoxyReturn}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a151cd0a1aae29fb3efdf0af4ed402673}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!get\+Size\+In\+Mbytes@{get\+Size\+In\+Mbytes}}
+\index{get\+Size\+In\+Mbytes@{get\+Size\+In\+Mbytes}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
+\subsubsection[{get\+Size\+In\+Mbytes(long filesize)}]{\setlength{\rightskip}{0pt plus 5cm}static double course.\+examples.\+spacesaver.\+Utility.\+get\+Size\+In\+Mbytes (
+\begin{DoxyParamCaption}
+\item[{long}]{filesize}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a151cd0a1aae29fb3efdf0af4ed402673}
+Method to convert a filesize in bytes to Mega bytes 
+\begin{DoxyParams}{Parameters}
+{\em filesize} & in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+size in Mega bytes 
+\end{DoxyReturn}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_aba39539a00ba3e4d7c74198092926dee}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!get\+Size\+In\+String@{get\+Size\+In\+String}}
 \index{get\+Size\+In\+String@{get\+Size\+In\+String}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
 \subsubsection[{get\+Size\+In\+String(long filesize)}]{\setlength{\rightskip}{0pt plus 5cm}static String course.\+examples.\+spacesaver.\+Utility.\+get\+Size\+In\+String (
@@ -87,6 +195,14 @@ Created by kannanb on 3/7/2016.
 \item[{long}]{filesize}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_aba39539a00ba3e4d7c74198092926dee}
+Method to retrieve a string containing size of a file in bytes, Kbytes, Mbytes, Gbytes based on the size provided in bytes 
+\begin{DoxyParams}{Parameters}
+{\em filesize} & Size of a file in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return a string containing the size converted to K, M, G bytes 
+\end{DoxyReturn}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a52b2d0846affd9ee60328055d871f4df}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!get\+Storage\+Capacity@{get\+Storage\+Capacity}}
 \index{get\+Storage\+Capacity@{get\+Storage\+Capacity}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
 \subsubsection[{get\+Storage\+Capacity()}]{\setlength{\rightskip}{0pt plus 5cm}static String course.\+examples.\+spacesaver.\+Utility.\+get\+Storage\+Capacity (
@@ -94,6 +210,19 @@ Created by kannanb on 3/7/2016.
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a52b2d0846affd9ee60328055d871f4df}
+Method to print the storage capacity details (total, used, free) \begin{DoxyReturn}{Returns}
+String containing details on the capacity details 
+\end{DoxyReturn}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_ad042fcb059f4401bc0a278735db91646}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!get\+Used\+Space\+Percentage@{get\+Used\+Space\+Percentage}}
+\index{get\+Used\+Space\+Percentage@{get\+Used\+Space\+Percentage}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
+\subsubsection[{get\+Used\+Space\+Percentage()}]{\setlength{\rightskip}{0pt plus 5cm}static long course.\+examples.\+spacesaver.\+Utility.\+get\+Used\+Space\+Percentage (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_ad042fcb059f4401bc0a278735db91646}
+Method to retrieve the percentage of space used on the device \begin{DoxyReturn}{Returns}
+percentage of space used on the device 
+\end{DoxyReturn}
 
 
 \subsection{Member Data Documentation}
@@ -103,6 +232,9 @@ Created by kannanb on 3/7/2016.
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a306cf6f2267973d242405123fc51c775}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E@{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E}}
 \index{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E@{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
 \subsubsection[{L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E}]{\setlength{\rightskip}{0pt plus 5cm}final String course.\+examples.\+spacesaver.\+Utility.\+L\+O\+G\+\_\+\+T\+A\+G\+\_\+\+N\+A\+M\+E = \char`\"{}Space\+Saver.\+Utility\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a306cf6f2267973d242405123fc51c775}
+\hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a633bce4a44e4cab909e8bac6bbc4caab}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+Z\+E@{M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+Z\+E}}
+\index{M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+Z\+E@{M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+Z\+E}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
+\subsubsection[{M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+Z\+E}]{\setlength{\rightskip}{0pt plus 5cm}final int course.\+examples.\+spacesaver.\+Utility.\+M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+Z\+E = 8\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a633bce4a44e4cab909e8bac6bbc4caab}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_utility_a8953f2c1e57838e6e76c22071b4e5a02}{}\index{course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}!M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S@{M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S}}
 \index{M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S@{M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S}!course\+::examples\+::spacesaver\+::\+Utility@{course\+::examples\+::spacesaver\+::\+Utility}}
 \subsubsection[{M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S}]{\setlength{\rightskip}{0pt plus 5cm}final int course.\+examples.\+spacesaver.\+Utility.\+M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+S\+\_\+\+T\+O\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S = 15\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_utility_a8953f2c1e57838e6e76c22071b4e5a02}

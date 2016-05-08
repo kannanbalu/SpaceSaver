@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kilobyte',['KILOBYTE',['../classcourse_1_1examples_1_1spacesaver_1_1_utility.html#a291dacb443d1ba16e25c95b0b436b6ec',1,'course::examples::spacesaver::Utility']]]
+  ['delete_5fimages',['DELETE_IMAGES',['../interfacecourse_1_1examples_1_1spacesaver_1_1_constants.html#af0b69c07dfb330102834c26b9ee10744',1,'course::examples::spacesaver::Constants']]]
 ];

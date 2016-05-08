@@ -52,7 +52,7 @@ static final String \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_image_a
 
 
 \subsection{Detailed Description}
-Created by kannanb on 3/8/2016. 
+Class for rendering a set of images passed to it. Images can be of any type (B\+M\+P, P\+N\+G, G\+I\+F, J\+P\+G) Created by kannanb on 3/8/2016. 
 
 \subsection{Constructor \& Destructor Documentation}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a4a64ff6f4afb032a7b909d452da4d0f7}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!Image\+Adapter@{Image\+Adapter}}
@@ -63,6 +63,13 @@ Created by kannanb on 3/8/2016.
 \item[{List$<$ {\bf Pair} $>$}]{list}
 \end{DoxyParamCaption}
 )}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a4a64ff6f4afb032a7b909d452da4d0f7}
+Constructor taking a context and a list of images as parameters 
+\begin{DoxyParams}{Parameters}
+{\em c} & Context passed to the imageadapter \\
+\hline
+{\em list} & List of images to be rendered \\
+\hline
+\end{DoxyParams}
 
 
 \subsection{Member Function Documentation}
@@ -75,6 +82,18 @@ Created by kannanb on 3/8/2016.
 \item[{int}]{req\+Height}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a76420c1f261150aa098281e6621bd6cf}
+Method to calculate the sample size from the options provided in Bitmap\+Factory 
+\begin{DoxyParams}{Parameters}
+{\em options} & contains the desired options in Bitmap\+Factory \\
+\hline
+{\em req\+Width} & width of the image \\
+\hline
+{\em req\+Height} & height of the image \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sample size from the options provided 
+\end{DoxyReturn}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a1cede336baa9c4e6fc4f77c7b92f8537}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!decode\+Sampled\+Bitmap\+From\+Resource@{decode\+Sampled\+Bitmap\+From\+Resource}}
 \index{decode\+Sampled\+Bitmap\+From\+Resource@{decode\+Sampled\+Bitmap\+From\+Resource}!course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}}
 \subsubsection[{decode\+Sampled\+Bitmap\+From\+Resource(\+File img\+File, int req\+Width, int req\+Height)}]{\setlength{\rightskip}{0pt plus 5cm}Bitmap course.\+examples.\+spacesaver.\+Image\+Adapter.\+decode\+Sampled\+Bitmap\+From\+Resource (
@@ -84,6 +103,23 @@ Created by kannanb on 3/8/2016.
 \item[{int}]{req\+Height}
 \end{DoxyParamCaption}
 ) throws Exception}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a1cede336baa9c4e6fc4f77c7b92f8537}
+Method to return the bitmap data of a given image file 
+\begin{DoxyParams}{Parameters}
+{\em img\+File} & Path to the image file on the device storage \\
+\hline
+{\em req\+Width} & required width of the decoded image \\
+\hline
+{\em req\+Height} & required height of the decoded image \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a Bitmap with dimension as specified in req\+Width and req\+Height parameters 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a7446ece5dd5f5c4f4afeb7a19cdb8728}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!get\+Count@{get\+Count}}
 \index{get\+Count@{get\+Count}!course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}}
 \subsubsection[{get\+Count()}]{\setlength{\rightskip}{0pt plus 5cm}int course.\+examples.\+spacesaver.\+Image\+Adapter.\+get\+Count (
@@ -91,6 +127,9 @@ Created by kannanb on 3/8/2016.
 {}
 \end{DoxyParamCaption}
 )}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a7446ece5dd5f5c4f4afeb7a19cdb8728}
+Method to get the number of images to be rendered \begin{DoxyReturn}{Returns}
+number of images 
+\end{DoxyReturn}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a28aa9706d5497b18f2ac7c57d8212391}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!get\+Item@{get\+Item}}
 \index{get\+Item@{get\+Item}!course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}}
 \subsubsection[{get\+Item(int position)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bmp\+Data} course.\+examples.\+spacesaver.\+Image\+Adapter.\+get\+Item (
@@ -98,6 +137,14 @@ Created by kannanb on 3/8/2016.
 \item[{int}]{position}
 \end{DoxyParamCaption}
 )}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a28aa9706d5497b18f2ac7c57d8212391}
+Method to return the image data for a given position in the view 
+\begin{DoxyParams}{Parameters}
+{\em position} & Index of the image to be rendered \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \hyperlink{classcourse_1_1examples_1_1spacesaver_1_1_bmp_data}{Bmp\+Data} structure containing the bitmap and path to the image file on the device storage 
+\end{DoxyReturn}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a54e7407f7a3d8e2e18513e8826ee861e}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!get\+Item\+Id@{get\+Item\+Id}}
 \index{get\+Item\+Id@{get\+Item\+Id}!course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}}
 \subsubsection[{get\+Item\+Id(int position)}]{\setlength{\rightskip}{0pt plus 5cm}long course.\+examples.\+spacesaver.\+Image\+Adapter.\+get\+Item\+Id (
@@ -105,6 +152,14 @@ Created by kannanb on 3/8/2016.
 \item[{int}]{position}
 \end{DoxyParamCaption}
 )}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a54e7407f7a3d8e2e18513e8826ee861e}
+Return the id of the item for a given position 
+\begin{DoxyParams}{Parameters}
+{\em position} & index of the item \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a4072f1ec52b57c428c4c85261be15986}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!get\+View@{get\+View}}
 \index{get\+View@{get\+View}!course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}}
 \subsubsection[{get\+View(int position, View convert\+View, View\+Group parent)}]{\setlength{\rightskip}{0pt plus 5cm}View course.\+examples.\+spacesaver.\+Image\+Adapter.\+get\+View (
@@ -122,6 +177,13 @@ Created by kannanb on 3/8/2016.
 \item[{List$<$ {\bf Pair} $>$}]{list}
 \end{DoxyParamCaption}
 )}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a8b457cf9300ede478217eb387fe5e757}
+Method to reinitialize the adapter with a new context and list of images 
+\begin{DoxyParams}{Parameters}
+{\em c} & Context passed to the imageadapter \\
+\hline
+{\em list} & List of images to be rendered \\
+\hline
+\end{DoxyParams}
 \hypertarget{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a1bc7a805204d8065aaddc2ad1b0c4a1e}{}\index{course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}!set\+Images@{set\+Images}}
 \index{set\+Images@{set\+Images}!course\+::examples\+::spacesaver\+::\+Image\+Adapter@{course\+::examples\+::spacesaver\+::\+Image\+Adapter}}
 \subsubsection[{set\+Images(\+List$<$ Pair $>$ list)}]{\setlength{\rightskip}{0pt plus 5cm}void course.\+examples.\+spacesaver.\+Image\+Adapter.\+set\+Images (
@@ -129,6 +191,11 @@ Created by kannanb on 3/8/2016.
 \item[{List$<$ {\bf Pair} $>$}]{list}
 \end{DoxyParamCaption}
 )}\label{classcourse_1_1examples_1_1spacesaver_1_1_image_adapter_a1bc7a805204d8065aaddc2ad1b0c4a1e}
+Method to reset a new list of images to the adapter for rendering 
+\begin{DoxyParams}{Parameters}
+{\em list} & List of images to be rendered \\
+\hline
+\end{DoxyParams}
 
 
 \subsection{Member Data Documentation}
